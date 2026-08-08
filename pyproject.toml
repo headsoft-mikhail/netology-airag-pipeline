@@ -1,0 +1,35 @@
+[project]
+name = "RAG-pipeline-template"
+version = "0.1.0"
+description = "Template RAG pipeline project"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pydantic",
+    "beautifulsoup4",
+    "datasketch",
+    "pyyaml",
+]
+
+[dependency-groups]
+dev = [
+    "ty",
+    "ruff",
+    "auto-typing-final",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rag_prep"]
+
+[tool.ty.src]
+exclude = []
+
+[tool.ruff]
+fix = true
+unsafe-fixes = true
+line-length = 120
+target-version = "py313"
