@@ -54,7 +54,7 @@ class RAGPipeline:
         deduplication_result: typing.Final = self.deduplicator.deduplicate(normalized_documents)
         LOGGER_OBJ.info(
             "Deduplication - DONE! "
-            f"len(normalized_documents) - {len(deduplication_result.documents)} documents removed."
+            f"{len(normalized_documents) - len(deduplication_result.documents)} documents removed."
             "\n-------------"
         )
 
