@@ -2,7 +2,7 @@ import logging
 import typing
 from pathlib import Path
 
-from rag_prep import models
+from rag import models
 
 LOGGER_OBJ: typing.Final = logging.getLogger(__name__)
 

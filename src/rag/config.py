@@ -8,6 +8,7 @@ import yaml
 class PathsConfig(pydantic.BaseModel):
     input: Path
     output: Path
+    chunks: Path
 
 
 class ParsingConfig(pydantic.BaseModel):
@@ -33,6 +34,19 @@ class ExportConfig(pydantic.BaseModel):
     jsonl: bool = True
 
 
+class ChunkingConfig(pydantic.BaseModel):
+    strategy: typing.Literal["hybrid"]
+    chunk_size: int = pydantic.Field(gt=0)
+    chunk_overlap: int = pydantic.Field(ge=0)
+    tokenizer_model: str
+
+    @pydantic.model_validator(mode="after")
+    def validate_overlap(self) -> typing.Self:
+        if self.chunk_overlap >= self.chunk_size:
+            raise ValueError("chunk_overlap must be less than chunk_size")
+        return self
+
+
 class PipelineConfig(pydantic.BaseModel):
     paths: PathsConfig
     parsing: ParsingConfig
@@ -40,6 +54,7 @@ class PipelineConfig(pydantic.BaseModel):
     normalization: NormalizationConfig
     deduplication: DeduplicationConfig
     export: ExportConfig
+    chunking: ChunkingConfig
 
 
 def load_config(path: Path) -> PipelineConfig:

@@ -1,6 +1,7 @@
 paths:
   input: data/raw
   output: data/prepared
+  chunks: data/chunks
 
 parsing:
   supported_formats:
@@ -22,3 +23,9 @@ deduplication:
 export:
   json: true
   jsonl: true
+
+chunking:
+  strategy: hybrid
+  chunk_size: 220
+  chunk_overlap: 40
+  tokenizer_model: text-embedding-3-small

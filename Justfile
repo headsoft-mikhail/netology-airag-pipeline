@@ -29,4 +29,4 @@ lint:
     uv run ty check
 
 run:
-    uv run python -m rag_prep --config config/default.yaml
+    uv run python -m rag --config config/default.yaml

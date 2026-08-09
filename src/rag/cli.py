@@ -2,8 +2,8 @@ import argparse
 import typing
 from pathlib import Path
 
-from rag_prep.config import load_config
-from rag_prep.pipeline import RAGPipeline
+from rag.config import load_config
+from rag.pipelines.prepare.pipeline import RAGPreparePipeline
 
 
 def main() -> None:
@@ -19,5 +19,5 @@ def main() -> None:
     args: typing.Final = parser.parse_args()
     config: typing.Final = load_config(args.config)
 
-    pipeline: typing.Final = RAGPipeline(config)
+    pipeline: typing.Final = RAGPreparePipeline(config)
     pipeline.run()

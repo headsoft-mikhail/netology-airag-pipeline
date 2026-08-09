@@ -1,7 +1,7 @@
 import logging
 import sys
 
-from rag_prep.cli import main
+from rag.cli import main
 
 logging.basicConfig(
     level=logging.INFO,
