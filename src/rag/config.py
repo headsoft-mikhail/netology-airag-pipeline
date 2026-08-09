@@ -10,10 +10,15 @@ class PathsConfig(pydantic.BaseModel):
     input: Path
     prepared: Path
     chunks: Path
+    embeddings: Path
 
     @property
-    def prepared_jsonl(self):
+    def prepared_jsonl(self) -> Path:
         return Path(self.prepared, "dataset.jsonl")
+
+    @property
+    def chunks_jsonl(self) -> Path:
+        return Path(self.chunks, "chunks.jsonl")
 
 
 class ParsingConfig(pydantic.BaseModel):

@@ -33,3 +33,6 @@ rag_prepare:
 
 rag_chunk:
     uv run python -m rag chunk
+
+rag_embedding:
+    uv run python -m rag embedding

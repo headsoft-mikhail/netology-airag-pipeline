@@ -4,6 +4,7 @@ from pathlib import Path
 
 from rag.config import load_config
 from rag.pipelines.chunk.pipeline import RAGChunkPipeline
+from rag.pipelines.embeddings.pipeline import RAGEmbeddingsPipeline
 from rag.pipelines.prepare.pipeline import RAGPreparePipeline
 
 
@@ -39,6 +40,17 @@ def main() -> None:
         help="Path to pipeline configuration",
     )
 
+    embedding_parser: typing.Final = subparsers.add_parser(
+        "embedding",
+        help="Prepare embeddings",
+    )
+    embedding_parser.add_argument(
+        "--config",
+        type=Path,
+        default=Path("config/default.yaml"),
+        help="Path to pipeline configuration",
+    )
+
     args: typing.Final = parser.parse_args()
     config: typing.Final = load_config(args.config)
 
@@ -46,6 +58,8 @@ def main() -> None:
         pipeline = RAGPreparePipeline(config)
     elif args.command == "chunk":
         pipeline = RAGChunkPipeline(config)
+    elif args.command == "embedding":
+        pipeline = RAGEmbeddingsPipeline(config)
     else:
         raise ValueError(f"Unknown command: {args.command}")
 

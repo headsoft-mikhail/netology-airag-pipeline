@@ -2,6 +2,7 @@ paths:
   input: data/raw
   prepared: data/prepared
   chunks: data/chunks
+  embeddings: data/embeddings
 
 parsing:
   supported_formats:
