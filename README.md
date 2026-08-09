@@ -3,7 +3,7 @@
 
 Пайплайн подготовки документов для последующего использования в системах Retrieval-Augmented Generation (RAG).
 
-Проект выполняет загрузку, parsing, очистку, нормализацию, дедупликацию, структурирование и экспорт документов в единый формат. Chunking, embeddings и vector database в рамках проекта не реализуются.
+Проект выполняет загрузку, parsing, очистку, нормализацию, дедупликацию, структурирование и экспорт документов в единый формат. Embeddings и vector database в рамках проекта не реализуются.
 
 ## Возможности
 
@@ -28,37 +28,79 @@ Pipeline поддерживает обработку документов сле
 * manifest запуска;
 * логирование этапов обработки;
 * воспроизводимый запуск через YAML-конфигурацию.
+* sentence-based, paragraph-based и token/text chunking;
+* overlap между соседними чанками;
+* token-aware ограничение размера чанков;
+* validation чанков;
+* metadata и lineage для чанков.
 
 ## Структура проекта
 
 ```
 project/
-├── config/
+├── Justfile
+├── README.md
+├── config
 │   └── default.yaml
-│
-├── data/
-│   ├── raw/
-│   │   └── raw_data_files
-│   │
-│   └── prepared/
-│       ├── dataset.json
-│       ├── dataset.jsonl
-│       └── manifest.json
-│
-├── src/
-│   └── rag_prep/
-│       ├── stages/
+├── data
+│   ├── chunks
+│   │   ├── chunks.json
+│   │   ├── chunks.jsonl
+│   │   └── manifest.json
+│   ├── prepared
+│   │   ├── dataset.json
+│   │   ├── dataset.jsonl
+│   │   └── manifest.json
+│   └── raw
+│       ├── backup_guide.txt
+│       ├── cpu_installation.txt
+│       ├── faq.json
+│       ├── memory_installation.txt
+│       ├── network_setup.txt
+│       ├── software_update.json
+│       ├── ssd_guide.txt
+│       ├── support_article.html
+│       ├── support_article_duplicate.html
+│       ├── support_article_near_duplicate.html
+│       ├── system_requirements.html
+│       └── troubleshooting.json
+├── pyproject.toml
+├── src
+│   ├── __init__.py
+│   └── rag
+│       ├── __init__.py
+│       ├── __main__.py
 │       ├── cli.py
 │       ├── config.py
 │       ├── models.py
-│       ├── pipeline.py
-│       └── __main__.py
-│
-├── pyproject.toml
-└── README.md
+│       └── pipelines
+│           ├── chunk
+│           │   ├── __init__.py
+│           │   ├── pipeline.py
+│           │   └── stages
+│           │       ├── __init__.py
+│           │       ├── exporter.py
+│           │       ├── loader.py
+│           │       ├── manifest.py
+│           │       ├── splitter.py
+│           │       └── validator.py
+│           └── prepare
+│               ├── __init__.py
+│               ├── pipeline.py
+│               └── stages
+│                   ├── __init__.py
+│                   ├── cleaner.py
+│                   ├── deduplication.py
+│                   ├── exporter.py
+│                   ├── loader.py
+│                   ├── manifest.py
+│                   ├── normalizer.py
+│                   ├── parser.py
+│                   └── structurer.py
+└── uv.lock
 ```
 
-## Этапы pipeline
+## Этапы prepare-pipeline
 
 Pipeline состоит из последовательных этапов.
 ```
@@ -196,6 +238,74 @@ Pipeline создаёт два формата:
 - manifest.json
 с информацией о результате запуска.
 
+## Этапы chunk-pipeline
+
+Prepared documents
+       │
+       ▼
+    Loading
+       │
+       ▼
+    Splitting
+       │
+       ▼
+   Validation
+       │
+       ▼
+    Export
+       │
+       ▼
+     Manifest
+       │
+       ▼
+     Chunks
+
+### Loading
+
+На этапе Loading pipeline загружает подготовленные документы из `data/prepared/documents.jsonl` и преобразует их во внутренние модели.
+
+---
+
+### Splitting
+
+На этапе Splitting текст документов разбивается на chunks с использованием выбранной стратегии chunking.
+
+Поддерживаются стратегии:
+
+* `sentence`;
+* `paragraph`;
+* `token` / `text`.
+
+При разбиении учитываются размер chunk, token budget и overlap.
+
+---
+
+### Validation
+
+На этапе Validation выполняется проверка сформированных chunks: наличие текста, корректность metadata, размера, идентификаторов, связи с исходным документом и overlap.
+
+Результаты проверки сохраняются в виде validation metrics.
+
+---
+
+### Export
+
+На этапе Export chunks сохраняются в `data/chunks/` в форматах:
+
+* `chunks.json`;
+* `chunks.jsonl`.
+
+---
+
+### Manifest
+
+На этапе Manifest формируется `manifest.json` с информацией о запуске, конфигурации, количестве chunks и результатах validation.
+
+---
+
+### Chunks
+
+Результатом pipeline является набор chunks с metadata, подготовленный для дальнейшего embeddings-этапа.
 ## Конфигурация
 
 Основные параметры pipeline находятся в `config/default.yaml`. 
@@ -237,7 +347,6 @@ Pipeline не требует ручного изменения исходных 
 
 В текущей версии не реализованы:
 
-* chunking;
 * embeddings;
 * vector database;
 * PDF parsing;
@@ -262,5 +371,5 @@ just setup && just python 3.13 && just lock && just install
 ## Запуск
 Pipeline запускается из корня проекта:
 ```bash
-just run
+just rag_prepare && just rag_chunk
 ```

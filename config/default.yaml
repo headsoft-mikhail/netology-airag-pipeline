@@ -25,7 +25,7 @@ export:
   jsonl: true
 
 chunking:
-  strategy: hybrid
+  strategy: sentence
   chunk_size: 220
-  chunk_overlap: 40
+  chunk_overlap: 50
   tokenizer_model: text-embedding-3-small

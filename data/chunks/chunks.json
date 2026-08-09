@@ -7,8 +7,8 @@
       "position": 0,
       "chunk_token_count": 152,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/backup_guide.txt",
       "section": null,
       "text_hash": "84944e4678ba1055a6561804d316c1f94fa8abe2657dae31ce32c2207905fbd1"
@@ -22,56 +22,56 @@
       "position": 1,
       "chunk_token_count": 216,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/backup_guide.txt",
       "section": null,
       "text_hash": "e8e4b62c23228bc9088430eeb47532b7430f6154988e2226858f149c6788c25b"
     }
   },
   {
-    "id": "ffcb0ee64a4a385f1adb20ba09b2cc025640ce6ef8fac83489eebe810cf077f3",
-    "text": "Дифференциальная резервная копия содержит изменения относительно последней полной копии. Хранение копий Не рекомендуется хранить единственную резервную копию на том же физическом диске, где находятся исходные данные. При повреждении диска одновременно могут быть потеряны и оригиналы, и резервная копия. Для важных данных желательно использовать несколько копий на разных носителях. Одна из копий может храниться на внешнем диске или удалённом сервере.",
+    "id": "a26dcf504cd2c1f5d28244ee04406ea227221ae7c8b22269a25586b97fbd579b",
+    "text": "Такой подход позволяет экономить место, однако восстановление может потребовать несколько наборов резервных данных. Дифференциальная резервная копия содержит изменения относительно последней полной копии. Хранение копий Не рекомендуется хранить единственную резервную копию на том же физическом диске, где находятся исходные данные. При повреждении диска одновременно могут быть потеряны и оригиналы, и резервная копия. Для важных данных желательно использовать несколько копий на разных носителях.",
     "metadata": {
       "document_id": "0c6bb8b97bf547e85b6056e1be47591a53eac9ddcc93e46e2d40eaf475e562f0",
       "position": 2,
-      "chunk_token_count": 190,
+      "chunk_token_count": 206,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/backup_guide.txt",
       "section": null,
-      "text_hash": "0c5cf86fa53d7c810d888db1698f67b459761a03d18c39bf4e9756735f02dc06"
+      "text_hash": "95d7d918e16ca49064931dc81a091e48a5f5ad4e16bc152b7f56f03150f6576c"
     }
   },
   {
-    "id": "593e2d36b3200fe2e10610a1c12f429af4bd2e217eb273f14cb066fc7a4cc036",
-    "text": "Одна из копий может храниться на внешнем диске или удалённом сервере. Проверка резервных копий Создание резервной копии не гарантирует возможность восстановления данных. Периодически проверяйте наличие файлов и выполняйте тестовое восстановление. Если резервное копирование выполняется автоматически, проверьте расписание и убедитесь, что предыдущие задания завершились без ошибок. Рекомендации Для важных данных используйте автоматическое резервное копирование. Храните несколько версий файлов, чтобы иметь возможность восстановить данные до момента возникновения проблемы.",
+    "id": "4727c95dde3a84f25c470ed7446d7104860676899eacf70135ab3e4d25ff29ef",
+    "text": "Для важных данных желательно использовать несколько копий на разных носителях. Одна из копий может храниться на внешнем диске или удалённом сервере. Проверка резервных копий Создание резервной копии не гарантирует возможность восстановления данных. Периодически проверяйте наличие файлов и выполняйте тестовое восстановление. Если резервное копирование выполняется автоматически, проверьте расписание и убедитесь, что предыдущие задания завершились без ошибок. Рекомендации Для важных данных используйте автоматическое резервное копирование.",
     "metadata": {
       "document_id": "0c6bb8b97bf547e85b6056e1be47591a53eac9ddcc93e46e2d40eaf475e562f0",
       "position": 3,
-      "chunk_token_count": 215,
+      "chunk_token_count": 204,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/backup_guide.txt",
       "section": null,
-      "text_hash": "119a08b7ba2ae0f87cbf70bbd8547f781ef07355ce78f5070350e1369170487f"
+      "text_hash": "856fbd0caa66bf3e3bc6748dac51d5bdfa30873567a8978102b58c9c3db24682"
     }
   },
   {
-    "id": "1bbe487b3ac44540c6ec185d5229b20bf6e41026a5975924ea9f44f10337546d",
-    "text": "Храните несколько версий файлов, чтобы иметь возможность восстановить данные до момента возникновения проблемы. Перед заменой системного диска или переустановкой операционной системы убедитесь, что необходимые данные доступны из резервной копии.",
+    "id": "d1949905fc276aab1c76a4bc6ee323b88433afe34ff6148ab9674aa3284499a1",
+    "text": "Рекомендации Для важных данных используйте автоматическое резервное копирование. Храните несколько версий файлов, чтобы иметь возможность восстановить данные до момента возникновения проблемы. Перед заменой системного диска или переустановкой операционной системы убедитесь, что необходимые данные доступны из резервной копии.",
     "metadata": {
       "document_id": "0c6bb8b97bf547e85b6056e1be47591a53eac9ddcc93e46e2d40eaf475e562f0",
       "position": 4,
-      "chunk_token_count": 86,
+      "chunk_token_count": 117,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/backup_guide.txt",
       "section": null,
-      "text_hash": "03fcc4f675030feec9974946c0b2e1755e3411e695b98a5d38f81a2e5e761ac0"
+      "text_hash": "727e87698d52ca7d8474475ff565931808f9ee29bff16e2de71beabf509073a8"
     }
   },
   {
@@ -82,8 +82,8 @@
       "position": 0,
       "chunk_token_count": 171,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/cpu_installation.txt",
       "section": null,
       "text_hash": "1b6df9ab2f369cec66d1fe3d15c767d58d8a7bb302fdbcec4767495d5719a1a6"
@@ -97,8 +97,8 @@
       "position": 1,
       "chunk_token_count": 206,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/cpu_installation.txt",
       "section": null,
       "text_hash": "9bf445564025a1f48fbb4c97cb592f2b6dc32f8ed08f60ffc80b5704957fbb23"
@@ -112,8 +112,8 @@
       "position": 2,
       "chunk_token_count": 201,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/cpu_installation.txt",
       "section": null,
       "text_hash": "0ef85fffac5055e7f50dda5f2c26825eadc38842cca1d12231f1a44383a61b6d"
@@ -127,8 +127,8 @@
       "position": 3,
       "chunk_token_count": 216,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/cpu_installation.txt",
       "section": null,
       "text_hash": "09e289c5e9149f897f3ef1efabb238edcef06f2b89d319214e60ee69f0fb81d1"
@@ -142,8 +142,8 @@
       "position": 4,
       "chunk_token_count": 159,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/cpu_installation.txt",
       "section": null,
       "text_hash": "6ec7485d5eb4d842c1c324165c0dce9b7719d97f804b2146ced346d4e325b278"
@@ -157,56 +157,56 @@
       "position": 0,
       "chunk_token_count": 178,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/faq.json",
       "section": null,
       "text_hash": "ac01edb420966957bbb1093949a8b4a8335d215739796c1f82257e55dc8f1267"
     }
   },
   {
-    "id": "04f7253227ea0c2bce7dad0a14eac70a95ec011b8999c7216e5e9920800618df",
-    "text": "Если SSD определяется в BIOS, но отсутствует в Windows, возможно, накопитель необходимо инициализировать и создать раздел в разделе «Управление дисками». category: storage tags: SSD M.2 Windows Item 3: question: Как проверить температуру процессора? answer: Температуру процессора можно посмотреть в BIOS или UEFI, а также с помощью программ мониторинга в операционной системе. При высокой температуре следует проверить установку системы охлаждения, состояние термопасты и работу вентиляторов. category: hardware tags: CPU temperature cooling Item 4: question: Что делать, если компьютер не подключается к Wi-Fi?",
+    "id": "ee71943310725bd99721cd170b3a33c2d21fa0e388d3af8f8244ade8803d0806",
+    "text": "answer: Проверьте правильность установки накопителя в разъём M.2 и убедитесь, что он определяется в BIOS или UEFI. Если SSD определяется в BIOS, но отсутствует в Windows, возможно, накопитель необходимо инициализировать и создать раздел в разделе «Управление дисками». category: storage tags: SSD M.2 Windows Item 3: question: Как проверить температуру процессора? answer: Температуру процессора можно посмотреть в BIOS или UEFI, а также с помощью программ мониторинга в операционной системе.",
     "metadata": {
       "document_id": "921ba0142fdfac9adfc178a49d4b3cb039d20032b5c6de41e4784f1602a0fd55",
       "position": 1,
-      "chunk_token_count": 216,
+      "chunk_token_count": 179,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/faq.json",
       "section": null,
-      "text_hash": "273c90fac2903c06fdcedb2d683088a9c666a12f54cdfb7b5a7fe44b8c2145fc"
+      "text_hash": "a519e972030d9d97c1ae64522d898f0dc44043306d1a536e2c027508a03ec68b"
     }
   },
   {
-    "id": "7117bcfecc69b9bd2ef28c5ffd2e889fb133c83aca9a6f54cb60f30cbab62119",
-    "text": "category: hardware tags: CPU temperature cooling Item 4: question: Что делать, если компьютер не подключается к Wi-Fi? answer: Проверьте, включён ли беспроводной адаптер, правильно ли введён пароль и видит ли компьютер нужную сеть. Если проблема сохраняется, перезапустите компьютер и маршрутизатор. Также проверьте настройки DHCP и состояние драйвера Wi-Fi адаптера. category: network tags: Wi-Fi DHCP network Item 5: question: Как освободить место на системном диске? answer: Удалите временные файлы и ненужные приложения, очистите корзину и проверьте папки с большими файлами.",
+    "id": "00bae0fdd1edf62afe81d4f1e342692560b644a694350a2e52ec93898bba8835",
+    "text": "answer: Температуру процессора можно посмотреть в BIOS или UEFI, а также с помощью программ мониторинга в операционной системе. При высокой температуре следует проверить установку системы охлаждения, состояние термопасты и работу вентиляторов. category: hardware tags: CPU temperature cooling Item 4: question: Что делать, если компьютер не подключается к Wi-Fi? answer: Проверьте, включён ли беспроводной адаптер, правильно ли введён пароль и видит ли компьютер нужную сеть. Если проблема сохраняется, перезапустите компьютер и маршрутизатор.",
     "metadata": {
       "document_id": "921ba0142fdfac9adfc178a49d4b3cb039d20032b5c6de41e4784f1602a0fd55",
       "position": 2,
-      "chunk_token_count": 205,
+      "chunk_token_count": 201,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/faq.json",
       "section": null,
-      "text_hash": "9a9a192e37d3ba1ae5704bc8e5d438bb24ceb4a369f51f2efcf6557ddad86e85"
+      "text_hash": "74b58ddb0a12283270cc69e278b048df31ba104c9e51ee99044dcfe6023007d5"
     }
   },
   {
-    "id": "4d53087dc7fefa449d72bbf5239a68a30ecd943281aeac9f5f59b7a896f49c3f",
-    "text": "В Windows для этого можно использовать встроенную функцию очистки диска или параметры хранилища. category: software tags: Windows storage cleanup",
+    "id": "7e1f45e44a3c9196872cba9b242f3a19549a0517163852ef204490148613829e",
+    "text": "Если проблема сохраняется, перезапустите компьютер и маршрутизатор. Также проверьте настройки DHCP и состояние драйвера Wi-Fi адаптера. category: network tags: Wi-Fi DHCP network Item 5: question: Как освободить место на системном диске? answer: Удалите временные файлы и ненужные приложения, очистите корзину и проверьте папки с большими файлами. В Windows для этого можно использовать встроенную функцию очистки диска или параметры хранилища. category: software tags: Windows storage cleanup",
     "metadata": {
       "document_id": "921ba0142fdfac9adfc178a49d4b3cb039d20032b5c6de41e4784f1602a0fd55",
       "position": 3,
-      "chunk_token_count": 39,
+      "chunk_token_count": 167,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/faq.json",
       "section": null,
-      "text_hash": "e885bf4bbc6a7633ee264ea9a5fe85a6853e032bc3689194844db95c5602ad71"
+      "text_hash": "617497fecc3c21cd32bb08d077208d024f69fd4519c0a5b3712025fee6c4c711"
     }
   },
   {
@@ -217,8 +217,8 @@
       "position": 0,
       "chunk_token_count": 169,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/memory_installation.txt",
       "section": null,
       "text_hash": "4a0eacb0d4989bb044fc4279aeec4e69cd1b56843551320d074facc63e4204ef"
@@ -232,8 +232,8 @@
       "position": 1,
       "chunk_token_count": 198,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/memory_installation.txt",
       "section": null,
       "text_hash": "b401adfc58a21fa02261db33dee99068210747a952dc77a874731e638f7f9c97"
@@ -247,8 +247,8 @@
       "position": 2,
       "chunk_token_count": 203,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/memory_installation.txt",
       "section": null,
       "text_hash": "6c8a6b513ea08e70347f2aaad975a8a97ed2fdf3e17a0418d7fdcc731948a65d"
@@ -262,71 +262,86 @@
       "position": 3,
       "chunk_token_count": 188,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/memory_installation.txt",
       "section": null,
       "text_hash": "d8f9c37cd8ac19ec00e59bd7af29fa8b24f6ecf8f326f731537b47cc5dbfe8f3"
     }
   },
   {
-    "id": "76be14cd3bbe76e71a52d3678259e785e3cac123a049bb6d722bf6af0540866d",
-    "text": "Установка нескольких модулей При установке двух или более модулей используйте рекомендованную производителем схему размещения. Для двух одинаковых модулей обычно применяется двухканальный режим памяти. Использование соответствующих слотов позволяет получить более высокую пропускную способность памяти. Не устанавливайте модули с чрезмерным усилием. Если модуль не входит в слот, проверьте его ориентацию и соответствие типу разъёма. Проверка после установки После установки подключите питание и включите компьютер.",
+    "id": "9dfdaf602fdaa603aed56a143822565d36a581b83b477cc3ff8b3996f40ae659",
+    "text": "5. Убедитесь, что модуль установлен ровно, а фиксаторы слота зафиксировали его с обеих сторон. Установка нескольких модулей При установке двух или более модулей используйте рекомендованную производителем схему размещения. Для двух одинаковых модулей обычно применяется двухканальный режим памяти. Использование соответствующих слотов позволяет получить более высокую пропускную способность памяти. Не устанавливайте модули с чрезмерным усилием.",
     "metadata": {
       "document_id": "f20a62680dfa3b5b6027e9964ee0c6ee388026bbf33da71eb459fe6e7bc00a22",
       "position": 4,
-      "chunk_token_count": 220,
+      "chunk_token_count": 200,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/memory_installation.txt",
       "section": null,
-      "text_hash": "c241f96ad83b0d5d0e5f6c8a233bc23db16ca395e8c3338791d9f9843ba4b93e"
+      "text_hash": "838370dd36dfd51ceff909beebd868f8275d23ad3e5c8559293c03045f5be253"
     }
   },
   {
-    "id": "09339b8125b4b4e2e74f26d0926527f2d109b9768842aa964a81c599c67447e6",
-    "text": "Проверка после установки После установки подключите питание и включите компьютер. Первый запуск после изменения конфигурации памяти может занимать больше времени, чем обычно. Откройте BIOS или UEFI и проверьте, что установленный объём оперативной памяти определяется правильно. После загрузки операционной системы проверьте объём доступной памяти в системных настройках. Проверка стабильности Если компьютер запускается, но работает нестабильно, появляются ошибки или система перезагружается, проверьте правильность установки модулей.",
+    "id": "32326827a9994047accade7dbcc3dfd11b132ed7083f400a4cfc60b8f9450ff6",
+    "text": "Не устанавливайте модули с чрезмерным усилием. Если модуль не входит в слот, проверьте его ориентацию и соответствие типу разъёма. Проверка после установки После установки подключите питание и включите компьютер. Первый запуск после изменения конфигурации памяти может занимать больше времени, чем обычно. Откройте BIOS или UEFI и проверьте, что установленный объём оперативной памяти определяется правильно. После загрузки операционной системы проверьте объём доступной памяти в системных настройках.",
     "metadata": {
       "document_id": "f20a62680dfa3b5b6027e9964ee0c6ee388026bbf33da71eb459fe6e7bc00a22",
       "position": 5,
       "chunk_token_count": 197,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/memory_installation.txt",
       "section": null,
-      "text_hash": "ae3f46f69b4a965752a345bab016afbf9c1062f42deb3675d886d425b7696ef3"
+      "text_hash": "9ae95bfbd4eba97397bffee985374e760032a84b7f87e0c11d62beb8f71cb162"
     }
   },
   {
-    "id": "59004125e5a6f3855bc73e94bf078fe78b3af92641bb1e762cd3eb3b371b1fdc",
-    "text": "При использовании нескольких модулей попробуйте временно установить только один модуль и проверить работу системы. Затем можно проверить остальные модули по отдельности. Если включён профиль XMP или EXPO, временно отключите его и проверьте стабильность системы на стандартных настройках памяти. При сохранении проблем рекомендуется выполнить тест оперативной памяти и проверить совместимость модулей с материнской платой. Замена оперативной памяти Перед заменой модулей полностью выключите компьютер и отключите питание.",
+    "id": "be46dcfbabe1cdace470ce83ae646718839b52fbdcd7adc8bca5df81c348d0ff",
+    "text": "После загрузки операционной системы проверьте объём доступной памяти в системных настройках. Проверка стабильности Если компьютер запускается, но работает нестабильно, появляются ошибки или система перезагружается, проверьте правильность установки модулей. При использовании нескольких модулей попробуйте временно установить только один модуль и проверить работу системы. Затем можно проверить остальные модули по отдельности. Если включён профиль XMP или EXPO, временно отключите его и проверьте стабильность системы на стандартных настройках памяти.",
     "metadata": {
       "document_id": "f20a62680dfa3b5b6027e9964ee0c6ee388026bbf33da71eb459fe6e7bc00a22",
       "position": 6,
-      "chunk_token_count": 192,
+      "chunk_token_count": 195,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/memory_installation.txt",
       "section": null,
-      "text_hash": "ef829d9e8cbea3e1d5cee0e61a2b707cc5d4f015c9b974eabded6dfaa71b963a"
+      "text_hash": "ced84d9dad8793cab6d4bf8d6b02012129274611667f62bd7055cae33b91b504"
     }
   },
   {
-    "id": "614209ae360b15d5a20fcd410f57e0996f30c5bd66200e1bb8735afbff800d3b",
-    "text": "Замена оперативной памяти Перед заменой модулей полностью выключите компьютер и отключите питание. Откройте фиксаторы слота и аккуратно извлеките модуль, удерживая его за края. После установки новых модулей повторно проверьте их обнаружение в BIOS или UEFI и убедитесь, что операционная система видит полный доступный объём памяти.",
+    "id": "1ff52571e5097e006cb1aca57ab435fb33a22521a600b919625b6d4124e2b6bb",
+    "text": "Если включён профиль XMP или EXPO, временно отключите его и проверьте стабильность системы на стандартных настройках памяти. При сохранении проблем рекомендуется выполнить тест оперативной памяти и проверить совместимость модулей с материнской платой. Замена оперативной памяти Перед заменой модулей полностью выключите компьютер и отключите питание. Откройте фиксаторы слота и аккуратно извлеките модуль, удерживая его за края.",
     "metadata": {
       "document_id": "f20a62680dfa3b5b6027e9964ee0c6ee388026bbf33da71eb459fe6e7bc00a22",
       "position": 7,
-      "chunk_token_count": 137,
+      "chunk_token_count": 173,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/memory_installation.txt",
       "section": null,
-      "text_hash": "98126fed6c1bc61957a5f32dd6eef3d50f6a2b9e633acfe14dc6465eaf932acd"
+      "text_hash": "fc36fa266b572bf852515903e00f8a4cc665031ca825b11e9137c8ce5f2d4db1"
+    }
+  },
+  {
+    "id": "9f8e8f8f1156a7136f6b5f70c5297df7f576a9b68bf965cc7508cf6f0632ee3b",
+    "text": "Откройте фиксаторы слота и аккуратно извлеките модуль, удерживая его за края. После установки новых модулей повторно проверьте их обнаружение в BIOS или UEFI и убедитесь, что операционная система видит полный доступный объём памяти.",
+    "metadata": {
+      "document_id": "f20a62680dfa3b5b6027e9964ee0c6ee388026bbf33da71eb459fe6e7bc00a22",
+      "position": 8,
+      "chunk_token_count": 97,
+      "chunk_size": 220,
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
+      "source": "data/raw/memory_installation.txt",
+      "section": null,
+      "text_hash": "d66b7ec01b69d519cc7b1211b0d93fa1e7c9773c70fed5bb8f038671ef784679"
     }
   },
   {
@@ -337,8 +352,8 @@
       "position": 0,
       "chunk_token_count": 175,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/network_setup.txt",
       "section": null,
       "text_hash": "b1932b65141164e434abedca4366d4e96e846385e93f51252697b7e3c1df4bdb"
@@ -352,26 +367,26 @@
       "position": 1,
       "chunk_token_count": 225,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/network_setup.txt",
       "section": null,
       "text_hash": "5f55451f83537466fc02f4617a08e10e03b03c29596d4d9f5860271693be0615"
     }
   },
   {
-    "id": "168c34c2e46aa5a2315a0692d1d250a9816d144940bd3c14a03a0a29aebd5d24",
-    "text": "3. Выберите нужную беспроводную сеть из списка доступных сетей. 4. Введите пароль сети. 5. Дождитесь завершения подключения. После подключения проверьте, что компьютер получил IP-адрес и имеет доступ к локальной сети. Проверка сетевого подключения Для проверки подключения можно использовать команду ping. Например: ping 192.168.1.1 Если маршрутизатор отвечает на запросы, связь с локальной сетью работает. Для проверки доступа в интернет можно выполнить запрос к внешнему адресу.",
+    "id": "29dc3e4848dfd880a0496cb01799f1e8eb3e57b29a27f1606a5e621e821aa901",
+    "text": "2. Включите Wi-Fi, если он отключён. 3. Выберите нужную беспроводную сеть из списка доступных сетей. 4. Введите пароль сети. 5. Дождитесь завершения подключения. После подключения проверьте, что компьютер получил IP-адрес и имеет доступ к локальной сети. Проверка сетевого подключения Для проверки подключения можно использовать команду ping. Например: ping 192.168.1.1 Если маршрутизатор отвечает на запросы, связь с локальной сетью работает. Для проверки доступа в интернет можно выполнить запрос к внешнему адресу.",
     "metadata": {
       "document_id": "d88830909fdd6a7da6720ecf8a0ba65bd2122c4be09834f945b7065cb7ecb728",
       "position": 2,
-      "chunk_token_count": 181,
+      "chunk_token_count": 197,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/network_setup.txt",
       "section": null,
-      "text_hash": "e63e42d3f11997cc868fd5b15365ed7bf1df17ac2be920897a6ffa2d7ce96b29"
+      "text_hash": "649bea90149b9c779377d1fe3e5c3a5490c8c6cad92598fe2248903db99f8614"
     }
   },
   {
@@ -382,8 +397,8 @@
       "position": 3,
       "chunk_token_count": 177,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/network_setup.txt",
       "section": null,
       "text_hash": "bd40f16d9fd1d1b5ed7d09153873e25367f695d71dc266d3399b2ec29ae22f71"
@@ -397,8 +412,8 @@
       "position": 4,
       "chunk_token_count": 86,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/network_setup.txt",
       "section": null,
       "text_hash": "4506abf4d081be67d6194c052e7f60cb26aa351ce5da428372e238bdd2c4935b"
@@ -412,8 +427,8 @@
       "position": 0,
       "chunk_token_count": 187,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/software_update.json",
       "section": null,
       "text_hash": "cbfde05ae143ebff7d8f52f4a879f5060fb33a08422cda31e89c3257fce8510b"
@@ -427,8 +442,8 @@
       "position": 1,
       "chunk_token_count": 221,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/software_update.json",
       "section": null,
       "text_hash": "d14934fa7f02a4cfa7fc6d01c8a58f26de56d7f7d64c79b39121209aac5694ea"
@@ -442,8 +457,8 @@
       "position": 2,
       "chunk_token_count": 207,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/software_update.json",
       "section": null,
       "text_hash": "c4bb74dbcfbdf85853e4db1bc8c4535a13c05f961a397938f9e689b396614d2a"
@@ -457,71 +472,71 @@
       "position": 0,
       "chunk_token_count": 216,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/ssd_guide.txt",
       "section": null,
       "text_hash": "378aeef7e5ff4ca9bb0d68c8925cfe437b48a30d4ebf8bc8d9744da000b11d87"
     }
   },
   {
-    "id": "3c2efce5fcf46d03481e77ab18501322fcdbc222af9a4ace24c5f9291cf72094",
-    "text": "Некоторые разъёмы могут поддерживать только PCIe NVMe, а другие также могут работать с SATA M.2. Установка M.2 SSD 1. Найдите на материнской плате разъём M.2. 2. При необходимости снимите радиатор M.2 и защитную плёнку с термопрокладки. 3. Вставьте накопитель в разъём под небольшим углом, совместив контакты SSD с разъёмом. 4. Опустите свободный край накопителя к поверхности материнской платы. 5. Закрепите SSD штатным винтом или механизмом фиксации. 6.",
+    "id": "31338d0a7bdd788673d9225419a98ed7687919e58f44db79369f6eb390721381",
+    "text": "Проверьте документацию материнской платы, чтобы определить поддерживаемый тип M.2-накопителя и доступные разъёмы. Некоторые разъёмы могут поддерживать только PCIe NVMe, а другие также могут работать с SATA M.2. Установка M.2 SSD 1. Найдите на материнской плате разъём M.2. 2. При необходимости снимите радиатор M.2 и защитную плёнку с термопрокладки. 3. Вставьте накопитель в разъём под небольшим углом, совместив контакты SSD с разъёмом. 4.",
     "metadata": {
       "document_id": "eaba13d3d47203b6915d944026c49188de7037f3becb70a69ea18a6116f23ef0",
       "position": 1,
-      "chunk_token_count": 215,
+      "chunk_token_count": 199,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/ssd_guide.txt",
       "section": null,
-      "text_hash": "71866d08076e00dc561854b6a8d74b199724443bb128c053492866be260e239f"
+      "text_hash": "cddaf8dafcdb449f57e4f65a2553f3dc247e06199419cf61b2e01d5208d0fe4b"
     }
   },
   {
-    "id": "7e6e2e34dc707bfbbc3603a1f529e9e95d82db47c1efb24627dacf76ddc0f5f5",
-    "text": "5. Закрепите SSD штатным винтом или механизмом фиксации. 6. Если используется радиатор M.2, установите его поверх накопителя. Не прикладывайте чрезмерное усилие при установке накопителя. Контакты должны войти в разъём плавно. Проверка накопителя После установки подключите питание и запустите компьютер. Откройте BIOS и убедитесь, что накопитель определяется системой. После загрузки операционной системы новый SSD может потребоваться инициализировать и создать на нём раздел.",
+    "id": "2a831cdeb4c9bd0c3766bcf7b1c63891fd60a3b1852f6dd4c57e5eb6db756924",
+    "text": "3. Вставьте накопитель в разъём под небольшим углом, совместив контакты SSD с разъёмом. 4. Опустите свободный край накопителя к поверхности материнской платы. 5. Закрепите SSD штатным винтом или механизмом фиксации. 6. Если используется радиатор M.2, установите его поверх накопителя. Не прикладывайте чрезмерное усилие при установке накопителя. Контакты должны войти в разъём плавно. Проверка накопителя После установки подключите питание и запустите компьютер.",
     "metadata": {
       "document_id": "eaba13d3d47203b6915d944026c49188de7037f3becb70a69ea18a6116f23ef0",
       "position": 2,
-      "chunk_token_count": 195,
+      "chunk_token_count": 207,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/ssd_guide.txt",
       "section": null,
-      "text_hash": "b03416c2bd0d6dcb60144cf5d030a677874cf061e08a7d8cc7d149350bbb60cb"
+      "text_hash": "c3ea85cbdfe2e8306fa608558ab35063bb135178689e64baf2d271ac69546e19"
     }
   },
   {
-    "id": "102ee86c83d5d1d0e1cd31939c7ec89422e8015ccea28642fba07d6767425c04",
-    "text": "После загрузки операционной системы новый SSD может потребоваться инициализировать и создать на нём раздел. В Windows это можно сделать с помощью встроенной утилиты «Управление дисками». Если накопитель не определяется, проверьте правильность установки и состояние разъёма M.2. Также убедитесь, что выбранный разъём не отключается при использовании определённых SATA-портов или PCIe-слотов. Охлаждение При высокой нагрузке NVMe SSD может нагреваться и снижать производительность из-за температурного ограничения.",
+    "id": "2eb6b3b7f5bd13055c586e8e0591de862420c3d31a76e03edeff7950ca73c81c",
+    "text": "Контакты должны войти в разъём плавно. Проверка накопителя После установки подключите питание и запустите компьютер. Откройте BIOS и убедитесь, что накопитель определяется системой. После загрузки операционной системы новый SSD может потребоваться инициализировать и создать на нём раздел. В Windows это можно сделать с помощью встроенной утилиты «Управление дисками». Если накопитель не определяется, проверьте правильность установки и состояние разъёма M.2. Также убедитесь, что выбранный разъём не отключается при использовании определённых SATA-портов или PCIe-слотов.",
     "metadata": {
       "document_id": "eaba13d3d47203b6915d944026c49188de7037f3becb70a69ea18a6116f23ef0",
       "position": 3,
-      "chunk_token_count": 196,
+      "chunk_token_count": 217,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/ssd_guide.txt",
       "section": null,
-      "text_hash": "95d1ce9d4990ba3abda18be70c171b7e451e70a3d766f1e4b141dc930a7502a9"
+      "text_hash": "2b7993e7bf726994d339043f72038c91d0bef3650deb543446472a4dc27af85e"
     }
   },
   {
-    "id": "3927f69bc6a52cdce3e0e269bfd2fda2a12ec9cac49d0c05a24d1d706fd58572",
-    "text": "Если материнская плата оснащена радиатором M.2, рекомендуется использовать его при наличии совместимой термопрокладки.",
+    "id": "cd213332b9082e37caf7a0a03aa55827f6e573d7018498122e35a50a2839cbc6",
+    "text": "Также убедитесь, что выбранный разъём не отключается при использовании определённых SATA-портов или PCIe-слотов. Охлаждение При высокой нагрузке NVMe SSD может нагреваться и снижать производительность из-за температурного ограничения. Если материнская плата оснащена радиатором M.2, рекомендуется использовать его при наличии совместимой термопрокладки.",
     "metadata": {
       "document_id": "eaba13d3d47203b6915d944026c49188de7037f3becb70a69ea18a6116f23ef0",
       "position": 4,
-      "chunk_token_count": 53,
+      "chunk_token_count": 148,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/ssd_guide.txt",
       "section": null,
-      "text_hash": "d3c190cad60a49aef949af96ca4ccca91bd17fdcee900c7cfade16210567d93d"
+      "text_hash": "94ae7ef486532c60bda8946518e45388c0cb645d1d273296637cb697df7da63d"
     }
   },
   {
@@ -532,8 +547,8 @@
       "position": 0,
       "chunk_token_count": 37,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/support_article.html",
       "section": "Диагностика проблем с загрузкой Windows",
       "text_hash": "6a4f5dddfaf2b2d2d980990d3c8c72d4584bfdc39c398a4af29888dfaa110578"
@@ -547,8 +562,8 @@
       "position": 1,
       "chunk_token_count": 110,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/support_article.html",
       "section": "Проверка внешних устройств",
       "text_hash": "839a839f9a5c9a34d88d1b4bb8831667a6ec5c1dec2f3cea7033a65cb810925e"
@@ -562,8 +577,8 @@
       "position": 2,
       "chunk_token_count": 159,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/support_article.html",
       "section": "Проверка загрузочного диска",
       "text_hash": "cfb319f4d1ff63ac50c34e006d173bb2473941671d966adc987ba8eab8610c03"
@@ -577,8 +592,8 @@
       "position": 3,
       "chunk_token_count": 133,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/support_article.html",
       "section": "Восстановление загрузки Windows",
       "text_hash": "d223a53b9c2f964ddad93fde03fb9697b01605a3a991bf33b783d7f801749a21"
@@ -592,8 +607,8 @@
       "position": 4,
       "chunk_token_count": 157,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/support_article.html",
       "section": "Проверка после восстановления",
       "text_hash": "d7500dadb2f63f46ffa0787c173926f3655ce762f5c1444ac1d5037ae0ad0b4f"
@@ -607,8 +622,8 @@
       "position": 0,
       "chunk_token_count": 25,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/system_requirements.html",
       "section": "Системные требования Desktop Support Tools",
       "text_hash": "51a47605347a4ad537f228a4f5d0d37c3ef6bca01216ef1000115a9fd7c6103c"
@@ -622,8 +637,8 @@
       "position": 1,
       "chunk_token_count": 161,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/system_requirements.html",
       "section": "Минимальные требования",
       "text_hash": "53ef7166be6bf94cccd2fe876146f2a53308522813389e8a3bf802a066480e40"
@@ -637,8 +652,8 @@
       "position": 2,
       "chunk_token_count": 111,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/system_requirements.html",
       "section": "Рекомендуемые требования",
       "text_hash": "95ea127c66cfddd1a4889392b08caac3fd9dbf92e247613e9434ba22e5d3eb88"
@@ -652,8 +667,8 @@
       "position": 3,
       "chunk_token_count": 132,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/system_requirements.html",
       "section": "Поддерживаемые компоненты",
       "text_hash": "87faf9347d5632c3da38719734ec82b7b80c8b9add6acd9b0d298467675ae13f"
@@ -667,8 +682,8 @@
       "position": 0,
       "chunk_token_count": 188,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/troubleshooting.json",
       "section": null,
       "text_hash": "99290860bf28b0ec2aed52e353b373e093a910895334f05f162de1173977b718"
@@ -682,26 +697,26 @@
       "position": 1,
       "chunk_token_count": 205,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/troubleshooting.json",
       "section": null,
       "text_hash": "404c257a63770315ba0dfcdf41bb608d514aa4889fae19126e1cc4d6f792ae97"
     }
   },
   {
-    "id": "6a8e7291b871a5e815f37db53c0186aa6f81c752e34a35b791087f27b89d9229",
-    "text": "Недостаточная мощность или неисправность блока питания. Нестабильные настройки оперативной памяти. Разгон компонентов. solution: Проверьте температуры процессора и видеокарты под нагрузкой. Убедитесь, что вентиляторы работают нормально. Если включён профиль XMP или EXPO, временно отключите его и проверьте стабильность системы. При сохранении проблемы проверьте блок питания и кабели питания компонентов.",
+    "id": "8799415c54713ee24fc7fee7f428aeaff1529ae3e5c42fd6ea4fe9e8b9553a5b",
+    "text": "possible_causes: Перегрев процессора или видеокарты. Недостаточная мощность или неисправность блока питания. Нестабильные настройки оперативной памяти. Разгон компонентов. solution: Проверьте температуры процессора и видеокарты под нагрузкой. Убедитесь, что вентиляторы работают нормально. Если включён профиль XMP или EXPO, временно отключите его и проверьте стабильность системы. При сохранении проблемы проверьте блок питания и кабели питания компонентов.",
     "metadata": {
       "document_id": "54d5373464f70be0d90b0c23db7ce1a20bb2b978cad2b6aaea18217abb3abeb3",
       "position": 2,
-      "chunk_token_count": 158,
+      "chunk_token_count": 179,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/troubleshooting.json",
       "section": null,
-      "text_hash": "5374b4f05e46548fed708726fb992d9cf3cd15193e0c2a9cd180e7f10cac6dbf"
+      "text_hash": "7713b1fcf5256be1c4c0d69b323b4aaa9742af45f84f5eac76a6666c5e73fe79"
     }
   },
   {
@@ -712,8 +727,8 @@
       "position": 3,
       "chunk_token_count": 190,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/troubleshooting.json",
       "section": null,
       "text_hash": "8591e50bc5083728b2a0fee452ecb45f30bb7f6735177346907bf7f79c3d13d6"
@@ -727,8 +742,8 @@
       "position": 4,
       "chunk_token_count": 214,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/troubleshooting.json",
       "section": null,
       "text_hash": "5e0f39f36df60e59906ec3374e0332275ad9295f487cf64fab694c0317fc3400"
@@ -742,8 +757,8 @@
       "position": 5,
       "chunk_token_count": 195,
       "chunk_size": 220,
-      "chunk_overlap": 40,
-      "chunking_strategy": "hybrid",
+      "chunk_overlap": 50,
+      "chunking_strategy": "sentence",
       "source": "data/raw/troubleshooting.json",
       "section": null,
       "text_hash": "82b0ceecca7449315270cf08138e9a2327d127597912927ddd8dc4a4d070a1b4"

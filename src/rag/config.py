@@ -40,7 +40,7 @@ class ExportConfig(pydantic.BaseModel):
 
 
 class ChunkingConfig(pydantic.BaseModel):
-    strategy: typing.Literal["hybrid"]
+    strategy: typing.Literal["sentence", "paragraph", "token", "text"]
     chunk_size: int = pydantic.Field(gt=0)
     chunk_overlap: int = pydantic.Field(ge=0)
     tokenizer_model: str

@@ -1,0 +1,23 @@
+{
+  "run_id": "e5b0d6654f166ba58cf0090cbb64a39635dcfff2ec771482cba4c5a1f4b1902e",
+  "created_at": "2026-08-09T14:50:24.648281+00:00",
+  "counts": {
+    "documents": 10,
+    "chunks": 51
+  },
+  "validation": {
+    "total_chunks": 51,
+    "empty_chunks_count": 0,
+    "oversized_chunks_count": 2,
+    "undersized_chunks_count": 0,
+    "invalid_metadata_count": 0,
+    "invalid_ids_count": 0,
+    "lineage_errors_count": 0,
+    "overlap_errors_count": 0
+  },
+  "config": {
+    "strategy": "sentence",
+    "chunk_size": 220,
+    "chunk_overlap": 50
+  }
+}

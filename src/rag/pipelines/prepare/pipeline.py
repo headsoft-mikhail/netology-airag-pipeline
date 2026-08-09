@@ -3,11 +3,11 @@ import logging
 import typing
 
 from rag.config import PipelineConfig
-from rag.manifest import Manifest
 from rag.pipelines.prepare.stages.cleaner import TextCleaner
 from rag.pipelines.prepare.stages.deduplication import Deduplicator
 from rag.pipelines.prepare.stages.exporter import DatasetExporter
 from rag.pipelines.prepare.stages.loader import load_documents
+from rag.pipelines.prepare.stages.manifest import Manifest
 from rag.pipelines.prepare.stages.normalizer import TextNormalizer
 from rag.pipelines.prepare.stages.parser import parse_document
 from rag.pipelines.prepare.stages.structurer import DocumentStructurer
