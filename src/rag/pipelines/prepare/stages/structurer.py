@@ -1,7 +1,7 @@
 import hashlib
 import typing
 
-from rag_prep import models
+from rag import models
 
 
 class DocumentStructurer:

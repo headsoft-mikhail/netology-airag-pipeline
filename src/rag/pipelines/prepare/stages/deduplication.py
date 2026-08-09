@@ -1,17 +1,17 @@
+import dataclasses
 import hashlib
 import logging
 import re
 import typing
-from dataclasses import dataclass
 
 from datasketch import MinHash
 
-from rag_prep import models
+from rag import models
 
 LOGGER_OBJ: typing.Final = logging.getLogger(__name__)
 
 
-@dataclass(kw_only=True, slots=True, frozen=True)
+@dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
 class Deduplicator:
     near_duplicate_threshold: float = 0.85
     num_perm: int = 128

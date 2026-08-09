@@ -2,20 +2,20 @@ import datetime as dt
 import logging
 import typing
 
-from rag_prep.config import PipelineConfig
-from rag_prep.manifest import Manifest
-from rag_prep.stages.cleaner import TextCleaner
-from rag_prep.stages.deduplication import Deduplicator
-from rag_prep.stages.exporter import DatasetExporter
-from rag_prep.stages.loader import load_documents
-from rag_prep.stages.normalizer import TextNormalizer
-from rag_prep.stages.parser import parse_document
-from rag_prep.stages.structurer import DocumentStructurer
+from rag.config import PipelineConfig
+from rag.pipelines.prepare.stages.cleaner import TextCleaner
+from rag.pipelines.prepare.stages.deduplication import Deduplicator
+from rag.pipelines.prepare.stages.exporter import DatasetExporter
+from rag.pipelines.prepare.stages.loader import load_documents
+from rag.pipelines.prepare.stages.manifest import Manifest
+from rag.pipelines.prepare.stages.normalizer import TextNormalizer
+from rag.pipelines.prepare.stages.parser import parse_document
+from rag.pipelines.prepare.stages.structurer import DocumentStructurer
 
 LOGGER_OBJ: typing.Final = logging.getLogger(__name__)
 
 
-class RAGPipeline:
+class RAGPreparePipeline:
     def __init__(self, config: PipelineConfig):
         self.config = config
 
@@ -24,7 +24,7 @@ class RAGPipeline:
             near_duplicate_threshold=(config.deduplication.similarity_threshold),
         )
         self.structurer = DocumentStructurer()
-        self.exporter = DatasetExporter(output_dir=config.paths.output)
+        self.exporter = DatasetExporter(output_dir=config.paths.prepared)
 
     def run(self) -> None:
         LOGGER_OBJ.info("Start pipeline...")
@@ -34,6 +34,7 @@ class RAGPipeline:
             input_dir=self.config.paths.input,
             supported_formats=(self.config.parsing.supported_formats),
         )
+        LOGGER_OBJ.info("Loading - DONE!\n-------------")
 
         parsed_documents: typing.Final = [parse_document(document) for document in documents]
         LOGGER_OBJ.info("Parsing - DONE!\n-------------")

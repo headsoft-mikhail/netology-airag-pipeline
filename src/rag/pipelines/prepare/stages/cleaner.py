@@ -2,7 +2,7 @@ import logging
 import re
 import typing
 
-from rag_prep import models
+from rag import models
 
 LOGGER_OBJ: typing.Final = logging.getLogger(__name__)
 
