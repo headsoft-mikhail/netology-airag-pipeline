@@ -2,13 +2,18 @@ import typing
 from pathlib import Path
 
 import pydantic
+import tiktoken
 import yaml
 
 
 class PathsConfig(pydantic.BaseModel):
     input: Path
-    output: Path
+    prepared: Path
     chunks: Path
+
+    @property
+    def prepared_jsonl(self):
+        return Path(self.prepared, "dataset.jsonl")
 
 
 class ParsingConfig(pydantic.BaseModel):
@@ -45,6 +50,10 @@ class ChunkingConfig(pydantic.BaseModel):
         if self.chunk_overlap >= self.chunk_size:
             raise ValueError("chunk_overlap must be less than chunk_size")
         return self
+
+    @property
+    def tokenizer(self):
+        return tiktoken.encoding_for_model(self.tokenizer_model)
 
 
 class PipelineConfig(pydantic.BaseModel):

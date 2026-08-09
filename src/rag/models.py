@@ -36,3 +36,21 @@ class PreparedDocumentMetadata(pydantic.BaseModel):
 class PreparedDocument(pydantic.BaseModel):
     text: str
     metadata: PreparedDocumentMetadata
+
+
+class ChunkMetadata(pydantic.BaseModel):
+    document_id: str
+    position: int
+    chunk_token_count: int
+    chunk_size: int
+    chunk_overlap: int
+    chunking_strategy: str
+    source: str | None = None
+    section: str | None = None
+    text_hash: str
+
+
+class Chunk(pydantic.BaseModel):
+    id: str
+    text: str
+    metadata: ChunkMetadata

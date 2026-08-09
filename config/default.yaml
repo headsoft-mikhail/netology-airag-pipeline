@@ -1,6 +1,6 @@
 paths:
   input: data/raw
-  output: data/prepared
+  prepared: data/prepared
   chunks: data/chunks
 
 parsing:

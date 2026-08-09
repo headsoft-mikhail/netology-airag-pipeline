@@ -3,28 +3,35 @@ import logging
 import typing
 from pathlib import Path
 
-from rag.models import PreparedDocument
+from rag import models
 
 LOGGER_OBJ: typing.Final = logging.getLogger(__name__)
 
 
-def load_documents(input_path: Path) -> list[PreparedDocument]:
-    documents: list[PreparedDocument] = []
+def load_documents(input_path: Path) -> list[models.PreparedDocument]:
+    LOGGER_OBJ.info(
+        f"Start loading {input_path}...",
+    )
+
+    if not input_path.exists():
+        raise FileNotFoundError(f"Input file not found: {input_path}")
+
+    documents: typing.Final[list[models.PreparedDocument]] = []
 
     with input_path.open("r", encoding="utf-8") as file:
-        for line_number, line in enumerate(file, start=1):
-            if not line.strip():
+        for one_line_number, one_line in enumerate(file, start=1):
+            if not one_line.strip():
                 continue
 
             try:
-                data = json.loads(line)
-                document = PreparedDocument.model_validate(data)
+                document = models.PreparedDocument.model_validate(json.loads(one_line))
             except (json.JSONDecodeError, ValueError) as exc:
-                LOGGER_OBJ.error("Failed to load document at line %d: %s", line_number, exc)
-                continue
+                raise ValueError(f"Failed to load document {input_path} at line {one_line_number}") from exc
 
             documents.append(document)
 
-    LOGGER_OBJ.info("Loaded %d prepared documents.", len(documents))
+    LOGGER_OBJ.info(
+        f"{len(documents)} documents loaded.",
+    )
 
     return documents

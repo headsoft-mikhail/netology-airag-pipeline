@@ -24,7 +24,7 @@ class RAGPreparePipeline:
             near_duplicate_threshold=(config.deduplication.similarity_threshold),
         )
         self.structurer = DocumentStructurer()
-        self.exporter = DatasetExporter(output_dir=config.paths.output)
+        self.exporter = DatasetExporter(output_dir=config.paths.prepared)
 
     def run(self) -> None:
         LOGGER_OBJ.info("Start pipeline...")
@@ -34,6 +34,7 @@ class RAGPreparePipeline:
             input_dir=self.config.paths.input,
             supported_formats=(self.config.parsing.supported_formats),
         )
+        LOGGER_OBJ.info("Loading - DONE!\n-------------")
 
         parsed_documents: typing.Final = [parse_document(document) for document in documents]
         LOGGER_OBJ.info("Parsing - DONE!\n-------------")

@@ -33,5 +33,5 @@ def load_documents(
             )
         )
 
-    LOGGER_OBJ.info(f"{len(documents)} documents found to load")
+    LOGGER_OBJ.info(f"{len(documents)} documents loaded.")
     return documents

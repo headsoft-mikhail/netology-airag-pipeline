@@ -1,4 +1,4 @@
-default: lock install lint run
+default: lock install lint rag_prepare rag_chunk
 
 setup:
     brew update
@@ -28,5 +28,8 @@ lint:
     uv run ruff check --fix
     uv run ty check
 
-run:
-    uv run python -m rag --config config/default.yaml
+rag_prepare:
+    uv run python -m rag prepare
+
+rag_chunk:
+    uv run python -m rag chunk
