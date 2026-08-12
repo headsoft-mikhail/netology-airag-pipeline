@@ -32,7 +32,11 @@ Pipeline поддерживает обработку документов сле
 * overlap между соседними чанками;
 * token-aware ограничение размера чанков;
 * validation чанков;
-* metadata и lineage для чанков.
+* metadata и lineage для чанков;
+* расчёт embeddings для подготовленных chunks;
+* validation embeddings;
+* сохранение метаданных embedding;
+* manifest для embeddings-pipeline.
 
 ## Структура проекта
 
@@ -46,6 +50,10 @@ project/
 │   ├── chunks
 │   │   ├── chunks.json
 │   │   ├── chunks.jsonl
+│   │   └── manifest.json
+│   ├── embeddings
+│   │   ├── embeddings.json
+│   │   ├── embeddings.jsonl
 │   │   └── manifest.json
 │   ├── prepared
 │   │   ├── dataset.json
@@ -72,6 +80,7 @@ project/
 │       ├── __main__.py
 │       ├── cli.py
 │       ├── config.py
+│       ├── manifest.py
 │       ├── models.py
 │       └── pipelines
 │           ├── chunk
@@ -81,8 +90,16 @@ project/
 │           │       ├── __init__.py
 │           │       ├── exporter.py
 │           │       ├── loader.py
-│           │       ├── manifest.py
 │           │       ├── splitter.py
+│           │       └── validator.py
+│           ├── embeddings
+│           │   ├── __init__.py
+│           │   ├── pipeline.py
+│           │   └── stages
+│           │       ├── __init__.py
+│           │       ├── embedding.py
+│           │       ├── exporter.py
+│           │       ├── loader.py
 │           │       └── validator.py
 │           └── prepare
 │               ├── __init__.py
@@ -93,7 +110,6 @@ project/
 │                   ├── deduplication.py
 │                   ├── exporter.py
 │                   ├── loader.py
-│                   ├── manifest.py
 │                   ├── normalizer.py
 │                   ├── parser.py
 │                   └── structurer.py
@@ -239,7 +255,7 @@ Pipeline создаёт два формата:
 с информацией о результате запуска.
 
 ## Этапы chunk-pipeline
-
+```
 Prepared documents
        │
        ▼
@@ -255,11 +271,9 @@ Prepared documents
     Export
        │
        ▼
-     Manifest
-       │
-       ▼
      Chunks
-
+```
+----
 ### Loading
 
 На этапе Loading pipeline загружает подготовленные документы из `data/prepared/documents.jsonl` и преобразует их во внутренние модели.
@@ -297,19 +311,93 @@ Prepared documents
 
 ---
 
-### Manifest
-
-На этапе Manifest формируется `manifest.json` с информацией о запуске, конфигурации, количестве chunks и результатах validation.
-
----
-
 ### Chunks
 
 Результатом pipeline является набор chunks с metadata, подготовленный для дальнейшего embeddings-этапа.
+
+---
+
+### Manifest
+
+На этапе Manifest формируется `manifest.json` с информацией о запуске, конфигурации, количестве chunks и результатах validation, с учетом manifest prepare-пайплайна.
+
+## Этапы embeddings-pipeline
+```
+     Chunks
+       │
+       ▼  
+    Loading  
+       │  
+       ▼  
+Embedding model  
+       │
+       ▼  
+   Validation  
+       │  
+       ▼
+     Export  
+       │
+       ▼
+   Embeddings
+```
+----
+### Loading
+
+На этапе Loading pipeline загружает chunks из data/chunks/chunks.jsonl и преобразует их во внутренние модели. Для каждого chunk сохраняются исходный текст, идентификатор и metadata, необходимые для последующего связывания chunk с рассчитанным embedding.
+
+---
+
+### Embedding
+
+На этапе Embedding для каждого chunk рассчитывается embedding с использованием выбранной embedding-модели.  
+Модель и её основные параметры задаются через конфигурацию pipeline.  
+Результатом обработки является embedding-вектор, связанный с исходным chunk через его metadata.  
+Поддерживается использование локальной embedding-модели.  
+Для каждого результата сохраняется:
+* исходный текст chunk;
+* embedding-вектор;
+* идентификатор исходного документа;
+* идентификатор и metadata chunk;
+* название embedding-модели;
+* размерность embedding-вектора.
+
+---
+
+### Validation
+
+На этапе Validation выполняется проверка рассчитанных embeddings.  
+Проверяется:
+* наличие embedding для каждого chunk;
+* отсутствие пустых embedding;
+* наличие идентификаторов chunks;
+* корректность связи embedding с исходным chunk;
+* одинаковая размерность всех embedding-векторов;
+* соответствие фактической размерности размерности, заявленной моделью;
+* отсутствие некорректных значений в embedding.
+
+Результаты проверки сохраняются в виде validation metrics.
+
+---
+
+### Export
+
+На этапе Export результаты embeddings сохраняются в data/embeddings/.  
+Pipeline создаёт файлы:
+* embeddings.json
+* embeddings.jsonl
+Каждая строка jsonl содержит один chunk, его embedding и metadata. Файл предназначен для последующего использования на этапе загрузки данных в vector store.
+
+---
+
+### Manifest
+
+После выполнения pipeline формируется manifest.json. Manifest содержит информацию о предыдущем этапе pipeline и результаты текущего запуска
+
+
 ## Конфигурация
 
 Основные параметры pipeline находятся в `config/default.yaml`. 
-В конфигурации задаются пути к исходным и подготовленным данным, параметры дедупликации и настройки экспорта.
+В конфигурации задаются пути к исходным и подготовленным данным, параметры дедупликации, настройки экспорта, чанкинга, эмбеддинга.
 
 Параметры не хранятся непосредственно в коде, что позволяет изменять поведение pipeline без изменения исходных файлов.
 
@@ -318,23 +406,11 @@ Prepared documents
 Для тестового набора используется 12 исходных документов.
 
 В набор специально включены:
-
 * документы разных форматов;
 * exact duplicate;
 * near-duplicate.
 
-Пример manifest:
-```json
-{
-  "started_at": "2026-08-08T15:53:07.934991+00:00",
-  "input_documents": 12,
-  "output_documents": 10,
-  "exact_duplicates": 1,
-  "near_duplicates": 1
-}
-```
-
-Таким образом, из 12 исходных документов после дедупликации в итоговый датасет попадает 10 документов.
+Из 12 исходных документов после дедупликации в итоговый датасет попадает 10 документов.
 
 Pipeline не требует ручного изменения исходных документов перед повторным запуском.
 Повторный запуск перезаписывает подготовленный датасет и manifest.
@@ -347,14 +423,15 @@ Pipeline не требует ручного изменения исходных 
 
 В текущей версии не реализованы:
 
-* embeddings;
 * vector database;
 * PDF parsing;
 * API sources;
 * semantic search;
 * LLM-based document processing.
 
-Эти этапы могут быть добавлены после подготовки единого очищенного и структурированного датасета.
+Расчёт embeddings реализован как отдельный pipeline после подготовки и chunking документов.  
+
+Следующим этапом обработки может быть загрузка полученных embeddings в vector store и реализация semantic search
 
 # Установка и запуск
 # Project dev environment (uv + just)
@@ -371,5 +448,11 @@ just setup && just python 3.13 && just lock && just install
 ## Запуск
 Pipeline запускается из корня проекта:
 ```bash
-just rag_prepare && just rag_chunk
+just rag_prepare && just rag_chunk && just reg_embegging
+```
+После выполнения результаты наxодятся в
+```
+data/prepared/
+data/chunks/
+data/embeddings/
 ```
