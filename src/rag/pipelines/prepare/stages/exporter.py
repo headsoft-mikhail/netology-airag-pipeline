@@ -10,6 +10,7 @@ class DatasetExporter:
 
     def export(self, documents: list[dict]) -> None:
         self.output_dir.mkdir(parents=True, exist_ok=True)
+
         self._export_json(documents)
         self._export_jsonl(documents)
 

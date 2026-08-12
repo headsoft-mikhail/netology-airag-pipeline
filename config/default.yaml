@@ -2,6 +2,7 @@ paths:
   input: data/raw
   prepared: data/prepared
   chunks: data/chunks
+  embeddings: data/embeddings
 
 parsing:
   supported_formats:
@@ -20,12 +21,11 @@ deduplication:
   near_duplicate: true
   similarity_threshold: 0.65
 
-export:
-  json: true
-  jsonl: true
-
 chunking:
   strategy: sentence
   chunk_size: 220
   chunk_overlap: 50
   tokenizer_model: text-embedding-3-small
+
+embedding:
+  model: "intfloat/multilingual-e5-base"

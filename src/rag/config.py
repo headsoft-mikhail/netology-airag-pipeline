@@ -10,10 +10,15 @@ class PathsConfig(pydantic.BaseModel):
     input: Path
     prepared: Path
     chunks: Path
+    embeddings: Path
 
     @property
-    def prepared_jsonl(self):
+    def prepared_jsonl(self) -> Path:
         return Path(self.prepared, "dataset.jsonl")
+
+    @property
+    def chunks_jsonl(self) -> Path:
+        return Path(self.chunks, "chunks.jsonl")
 
 
 class ParsingConfig(pydantic.BaseModel):
@@ -34,11 +39,6 @@ class DeduplicationConfig(pydantic.BaseModel):
     similarity_threshold: float = 0.85
 
 
-class ExportConfig(pydantic.BaseModel):
-    json: bool = True
-    jsonl: bool = True
-
-
 class ChunkingConfig(pydantic.BaseModel):
     strategy: typing.Literal["sentence", "paragraph", "token", "text"]
     chunk_size: int = pydantic.Field(gt=0)
@@ -56,14 +56,24 @@ class ChunkingConfig(pydantic.BaseModel):
         return tiktoken.encoding_for_model(self.tokenizer_model)
 
 
+class EmbeddingConfig(pydantic.BaseModel):
+    model: str = "intfloat/multilingual-e5-base"
+
+    @property
+    def transformer(self):
+        from sentence_transformers import SentenceTransformer
+
+        return SentenceTransformer(self.model)
+
+
 class PipelineConfig(pydantic.BaseModel):
     paths: PathsConfig
     parsing: ParsingConfig
     cleaning: CleaningConfig
     normalization: NormalizationConfig
     deduplication: DeduplicationConfig
-    export: ExportConfig
     chunking: ChunkingConfig
+    embedding: EmbeddingConfig
 
 
 def load_config(path: Path) -> PipelineConfig:

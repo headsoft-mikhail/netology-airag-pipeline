@@ -1,4 +1,4 @@
-default: lock install lint rag_prepare rag_chunk
+default: lock install lint rag_prepare rag_chunk rag_embedding
 
 setup:
     brew update
@@ -33,3 +33,6 @@ rag_prepare:
 
 rag_chunk:
     uv run python -m rag chunk
+
+rag_embedding:
+    uv run python -m rag embedding

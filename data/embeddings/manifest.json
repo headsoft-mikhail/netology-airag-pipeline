@@ -16,7 +16,7 @@
       "normalization_unicode_form": "NFC"
     }
   },
-  "run_id": "9c2767ce-a8b2-4178-83fe-161bc2a32a82",
+  "run_id": "361f5fd0-f48a-4fe1-9fd9-0462200ceb78",
   "chunk": {
     "run_id": "efc290e9-5fa4-42f3-b8df-4e222f605333",
     "started_at": "2026-08-12T08:57:24.559417+00:00",
@@ -39,6 +39,30 @@
       "strategy": "sentence",
       "chunk_size": 220,
       "chunk_overlap": 50
+    }
+  },
+  "embedding": {
+    "run_id": "a79b2e6e-63d7-48f8-966e-07184640a9e2",
+    "started_at": "2026-08-12T08:57:33.389722+00:00",
+    "created_at": "2026-08-12T08:57:34.576105+00:00",
+    "count": {
+      "input_chunks": 51,
+      "output_embeddings": 51
+    },
+    "embedding": {
+      "model": "intfloat/multilingual-e5-base",
+      "dimensions": 768
+    },
+    "validation": {
+      "total_chunks": 51,
+      "total_embeddings": 51,
+      "empty_embeddings_count": 0,
+      "invalid_values_count": 0,
+      "invalid_dimensions_count": 0,
+      "invalid_metadata_count": 0,
+      "duplicate_ids_count": 0,
+      "lineage_errors_count": 0,
+      "text_mismatch_count": 0
     }
   }
 }
