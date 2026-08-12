@@ -54,3 +54,15 @@ class Chunk(pydantic.BaseModel):
     id: str
     text: str
     metadata: ChunkMetadata
+
+
+class EmbeddedChunkMetadata(ChunkMetadata):
+    embedding_model: str
+    embedding_dimensions: int
+
+
+class EmbeddedChunk(pydantic.BaseModel):
+    id: str
+    text: str
+    embedding: list[float]
+    metadata: EmbeddedChunkMetadata

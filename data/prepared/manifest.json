@@ -1,7 +1,20 @@
 {
-  "started_at": "2026-08-09T14:50:23.813381+00:00",
-  "input_documents": 12,
-  "output_documents": 10,
-  "exact_duplicates": 1,
-  "near_duplicates": 1
+  "prepare": {
+    "run_id": "fd7a3ada-578c-4866-87c1-33bdb73d3268",
+    "started_at": "2026-08-12T08:57:21.064133+00:00",
+    "created_at": "2026-08-12T08:57:21.178774+00:00",
+    "count": {
+      "input_documents": 12,
+      "output_documents": 10
+    },
+    "deduplication": {
+      "exact_duplicates": 1,
+      "near_duplicates": 1
+    },
+    "config": {
+      "deduplication_similarity_threshold": 0.65,
+      "normalization_unicode_form": "NFC"
+    }
+  },
+  "run_id": "de002e3f-4668-44a0-b245-4bbba71f0183"
 }

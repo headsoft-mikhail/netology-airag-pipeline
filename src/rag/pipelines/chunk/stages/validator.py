@@ -8,11 +8,11 @@ import typing
 from rag import models
 from rag.config import ChunkingConfig
 
-logger = logging.getLogger(__name__)
+LOGGER_OBJ: typing.Final = logging.getLogger(__name__)
 
 
 @dataclasses.dataclass(frozen=True, slots=True)
-class ValidationMetrics:
+class ChunkingValidationMetrics:
     total_chunks: int
     empty_chunks_count: int
     oversized_chunks_count: int
@@ -46,7 +46,7 @@ class ChunkValidator:
         self,
         chunks: list[models.Chunk],
         documents: list[models.PreparedDocument],
-    ) -> ValidationMetrics:
+    ) -> ChunkingValidationMetrics:
         document_ids: typing.Final = {document.metadata.document_id for document in documents}
 
         empty_chunks_count = 0
@@ -93,7 +93,7 @@ class ChunkValidator:
 
             overlap_errors_count += self._validate_overlap(document_chunks)
 
-        metrics: typing.Final = ValidationMetrics(
+        metrics: typing.Final = ChunkingValidationMetrics(
             total_chunks=len(chunks),
             empty_chunks_count=empty_chunks_count,
             oversized_chunks_count=oversized_chunks_count,
@@ -143,16 +143,10 @@ class ChunkValidator:
 
         return chunk.id == expected_id
 
-    def _validate_positions(
-        self,
-        chunks: list[models.Chunk],
-    ) -> bool:
+    def _validate_positions(self, chunks: list[models.Chunk]) -> bool:
         return all(chunk.metadata.position == index for index, chunk in enumerate(chunks))
 
-    def _validate_overlap(
-        self,
-        chunks: list[models.Chunk],
-    ) -> int:
+    def _validate_overlap(self, chunks: list[models.Chunk]) -> int:
         if len(chunks) < 2 or self.config.chunk_overlap == 0:
             return 0
 
@@ -277,9 +271,9 @@ class ChunkValidator:
 
     def _log_metrics(
         self,
-        metrics: ValidationMetrics,
+        metrics: ChunkingValidationMetrics,
     ) -> None:
-        logger.info(
+        LOGGER_OBJ.info(
             (
                 "Chunk validation: "
                 "total=%d, "

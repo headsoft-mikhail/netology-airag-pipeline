@@ -1,4 +1,4 @@
-default: lock install lint rag_prepare rag_chunk
+default: lock install lint rag_prepare rag_chunk rag_embedding
 
 setup:
     brew update

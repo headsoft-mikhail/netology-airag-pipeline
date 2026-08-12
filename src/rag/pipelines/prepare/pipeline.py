@@ -3,11 +3,11 @@ import logging
 import typing
 
 from rag.config import PipelineConfig
+from rag.manifest import ManifestManager, StagesEnum
 from rag.pipelines.prepare.stages.cleaner import TextCleaner
 from rag.pipelines.prepare.stages.deduplication import Deduplicator
 from rag.pipelines.prepare.stages.exporter import DatasetExporter
 from rag.pipelines.prepare.stages.loader import load_documents
-from rag.pipelines.prepare.stages.manifest import Manifest
 from rag.pipelines.prepare.stages.normalizer import TextNormalizer
 from rag.pipelines.prepare.stages.parser import parse_document
 from rag.pipelines.prepare.stages.structurer import DocumentStructurer
@@ -25,10 +25,11 @@ class RAGPreparePipeline:
         )
         self.structurer = DocumentStructurer()
         self.exporter = DatasetExporter(output_dir=config.paths.prepared)
+        self.manifest_manager = ManifestManager(config=self.config)
 
     def run(self) -> None:
         LOGGER_OBJ.info("Start pipeline...")
-        started_at: typing.Final = dt.datetime.now(dt.UTC).isoformat()
+        started_at: typing.Final = dt.datetime.now(tz=dt.UTC).isoformat()
 
         documents: typing.Final = load_documents(
             input_dir=self.config.paths.input,
@@ -65,13 +66,11 @@ class RAGPreparePipeline:
         LOGGER_OBJ.info("Exporting results...")
         self.exporter.export(structured_documents)
 
-        LOGGER_OBJ.info("Exporting manifest...")
-        Manifest(
+        self.manifest_manager.create_stage_manifest(
+            stage=StagesEnum.PREPARE,
             started_at=started_at,
-            input_documents=len(documents),
-            output_documents=len(deduplication_result.documents),
-            exact_duplicates=deduplication_result.exact_duplicates,
-            near_duplicates=deduplication_result.near_duplicates,
-        ).save(self.exporter.output_dir / "manifest.json")
+            raw_documents=documents,
+            deduplication_result=deduplication_result,
+        )
 
         LOGGER_OBJ.info("DONE!")
