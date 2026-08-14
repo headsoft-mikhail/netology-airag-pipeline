@@ -1,4 +1,4 @@
-default: lock install lint rag_prepare rag_chunk rag_embedding
+default: lock install lint rag_prepare rag_chunk rag_embedding rag_vectorstore
 
 setup:
     brew update
@@ -36,3 +36,12 @@ rag_chunk:
 
 rag_embedding:
     uv run python -m rag embedding
+
+rag_vectorstore:
+    uv run python -m rag vector_store
+
+pipeline:
+    uv run python -m rag prepare
+    uv run python -m rag chunk
+    uv run python -m rag embedding
+    uv run python -m rag vector_store

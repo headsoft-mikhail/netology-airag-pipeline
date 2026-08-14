@@ -36,7 +36,13 @@ Pipeline поддерживает обработку документов сле
 * расчёт embeddings для подготовленных chunks;
 * validation embeddings;
 * сохранение метаданных embedding;
-* manifest для embeddings-pipeline.
+* manifest для embeddings-pipeline;
+* загрузка готовых embeddings в vector store;
+* создание и пересоздание коллекции Qdrant;
+* batch-загрузка vectors и metadata;
+* validation загруженных данных;
+* тестовый similarity search;
+* manifest для vector-store-pipeline.
 
 ## Структура проекта
 
@@ -394,10 +400,122 @@ Pipeline создаёт файлы:
 После выполнения pipeline формируется manifest.json. Manifest содержит информацию о предыдущем этапе pipeline и результаты текущего запуска
 
 
+## Этапы vector-store-pipeline
+```
+   Embeddings
+       │
+       ▼
+    Loading
+       │
+       ▼
+  Vector Store
+       │
+       ▼
+   Validation
+       │
+       ▼
+     Search
+       │
+       ▼
+   Artifacts
+```
+
+### Loading
+
+На этапе Loading pipeline загружает готовые embeddings из data/embeddings/embeddings.jsonl. Записи преобразуются во внутренние модели и передаются в vector store
+
+---
+
+### Vector Store
+
+В качестве vector store используется Qdrant.
+
+Qdrant выбран для хранения embedding-векторов вместе с payload, содержащим текст chunk и его metadata. Это позволяет выполнять similarity search и одновременно получать информацию об исходном chunk.
+
+Почему Qdrant
+
+Выбран Qdrant, поскольку он сочетает простой локальный запуск, similarity search и хранение embedding вместе с metadata (payload).
+
+В отличие от FAISS, Qdrant предоставляет полноценное хранилище с metadata и коллекциями. Chroma также подходит для локального RAG, но Qdrant удобнее для явного управления размерностью vectors, distance metric и batch-загрузкой. Milvus для небольшого учебного проекта избыточен, а pgvector имеет смысл преимущественно при наличии PostgreSQL-инфраструктуры.
+
+Для данного проекта Qdrant является оптимальным вариантом по соотношению простоты и возможностей.
+
+На этапе создания коллекции задаются:
+
+* название коллекции;
+* размерность vectors;
+* distance metric;
+* режим пересоздания коллекции.
+
+Embeddings загружаются batch-ами.
+
+Для каждой записи в Qdrant сохраняются:
+
+* embedding-вектор;
+* идентификатор chunk;
+* текст chunk;
+* идентификатор документа;
+* source;
+* metadata;
+* информация об embedding-модели и её размерности.
+
+Идентификатор точки Qdrant формируется отдельно на основе идентификатора chunk, поэтому исходный chunk_id сохраняется в payload.
+
+---
+
+### Validation
+
+После загрузки выполняется проверка корректности индекса.
+
+Проверяется:
+
+* количество embeddings во входном файле;
+* количество points в коллекции;
+* совпадение количества входных embeddings и сохранённых points;
+* корректность размерности vectors;
+* отсутствие пустых vectors;
+* отсутствие некорректных значений;
+* наличие текста;
+* наличие chunk_id;
+* наличие document_id;
+* наличие metadata.
+
+Результаты проверки сохраняются в виде validation metrics.
+Отдельный validation.json для этого стейджа не создается, результат валидации сохраняется в `data/vector_store/manifest.json`
+
+---
+
+### Search
+
+После загрузки выполняются тестовые similarity search-запросы.
+
+Для тестовых запросов используются существующие embeddings из входного файла, поэтому повторно рассчитывать embedding не требуется.
+
+Для каждого запроса сохраняются:
+
+* идентификатор тестового chunk;
+* текст запроса;
+* найденные chunks;
+* score;
+* идентификаторы найденных chunks;
+* metadata найденных результатов.
+
+Результаты сохраняются в `data/vector_store/search_results.json`
+
+---
+
+### Manifest
+
+После выполнения pipeline формируется manifest.json.
+
+Manifest содержит информацию о предыдущих этапах пайплайна и текущем запуске vector-store-pipeline.
+
+---
+
 ## Конфигурация
 
-Основные параметры pipeline находятся в `config/default.yaml`. 
-В конфигурации задаются пути к исходным и подготовленным данным, параметры дедупликации, настройки экспорта, чанкинга, эмбеддинга.
+Все параметры pipeline находятся в `config/default.yaml`. 
+В конфигурации задаются пути к исходным и подготовленным данным, параметры дедупликации, настройки экспорта, чанкинга, эмбеддинга, vector-store.
 
 Параметры не хранятся непосредственно в коде, что позволяет изменять поведение pipeline без изменения исходных файлов.
 
@@ -417,21 +535,6 @@ Pipeline не требует ручного изменения исходных 
 
 Идентификаторы документов формируются детерминированно, поэтому при одинаковых входных данных структура и результаты обработки остаются одинаковыми.
 
-## Ограничения
-
-Проект предназначен для демонстрации этапов подготовки данных перед RAG.
-
-В текущей версии не реализованы:
-
-* vector database;
-* PDF parsing;
-* API sources;
-* semantic search;
-* LLM-based document processing.
-
-Расчёт embeddings реализован как отдельный pipeline после подготовки и chunking документов.  
-
-Следующим этапом обработки может быть загрузка полученных embeddings в vector store и реализация semantic search
 
 # Установка и запуск
 # Project dev environment (uv + just)
@@ -448,11 +551,16 @@ just setup && just python 3.13 && just lock && just install
 ## Запуск
 Pipeline запускается из корня проекта:
 ```bash
-just rag_prepare && just rag_chunk && just reg_embegging
+just rag_prepare && just rag_chunk && just reg_embegging && just rag_vectorstore
+```
+или
+```bash
+just pipeline
 ```
 После выполнения результаты наxодятся в
 ```
 data/prepared/
 data/chunks/
 data/embeddings/
+data/vector_store/
 ```

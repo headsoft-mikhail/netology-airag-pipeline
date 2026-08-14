@@ -6,6 +6,7 @@ from rag.config import load_config
 from rag.pipelines.chunk.pipeline import RAGChunkPipeline
 from rag.pipelines.embeddings.pipeline import RAGEmbeddingsPipeline
 from rag.pipelines.prepare.pipeline import RAGPreparePipeline
+from rag.pipelines.vector_store.pipeline import RAGVectorStorePipeline
 
 
 def main() -> None:
@@ -51,6 +52,17 @@ def main() -> None:
         help="Path to pipeline configuration",
     )
 
+    vector_store_parser: typing.Final = subparsers.add_parser(
+        "vector_store",
+        help="Prepare vector store",
+    )
+    vector_store_parser.add_argument(
+        "--config",
+        type=Path,
+        default=Path("config/default.yaml"),
+        help="Path to pipeline configuration",
+    )
+
     args: typing.Final = parser.parse_args()
     config: typing.Final = load_config(args.config)
 
@@ -60,6 +72,8 @@ def main() -> None:
         pipeline = RAGChunkPipeline(config)
     elif args.command == "embedding":
         pipeline = RAGEmbeddingsPipeline(config)
+    elif args.command == "vector_store":
+        pipeline = RAGVectorStorePipeline(config)
     else:
         raise ValueError(f"Unknown command: {args.command}")
 
