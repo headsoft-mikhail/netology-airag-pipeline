@@ -65,19 +65,26 @@ project/
 │   │   ├── dataset.json
 │   │   ├── dataset.jsonl
 │   │   └── manifest.json
-│   └── raw
-│       ├── backup_guide.txt
-│       ├── cpu_installation.txt
-│       ├── faq.json
-│       ├── memory_installation.txt
-│       ├── network_setup.txt
-│       ├── software_update.json
-│       ├── ssd_guide.txt
-│       ├── support_article.html
-│       ├── support_article_duplicate.html
-│       ├── support_article_near_duplicate.html
-│       ├── system_requirements.html
-│       └── troubleshooting.json
+│   ├── raw
+│   │   ├── backup_guide.txt
+│   │   ├── cpu_installation.txt
+│   │   ├── faq.json
+│   │   ├── memory_installation.txt
+│   │   ├── network_setup.txt
+│   │   ├── software_update.json
+│   │   ├── ssd_guide.txt
+│   │   ├── support_article.html
+│   │   ├── support_article_duplicate.html
+│   │   ├── support_article_near_duplicate.html
+│   │   ├── system_requirements.html
+│   │   └── troubleshooting.json
+│   └── vector_store
+│       ├── collection
+│       │   └── rag_chunks
+│       │       └── storage.sqlite
+│       ├── manifest.json
+│       ├── meta.json
+│       └── search_results.json
 ├── pyproject.toml
 ├── src
 │   ├── __init__.py
@@ -107,18 +114,28 @@ project/
 │           │       ├── exporter.py
 │           │       ├── loader.py
 │           │       └── validator.py
-│           └── prepare
+│           ├── prepare
+│           │   ├── __init__.py
+│           │   ├── pipeline.py
+│           │   └── stages
+│           │       ├── __init__.py
+│           │       ├── cleaner.py
+│           │       ├── deduplication.py
+│           │       ├── exporter.py
+│           │       ├── loader.py
+│           │       ├── normalizer.py
+│           │       ├── parser.py
+│           │       └── structurer.py
+│           └── vector_store
 │               ├── __init__.py
 │               ├── pipeline.py
 │               └── stages
 │                   ├── __init__.py
-│                   ├── cleaner.py
-│                   ├── deduplication.py
 │                   ├── exporter.py
 │                   ├── loader.py
-│                   ├── normalizer.py
-│                   ├── parser.py
-│                   └── structurer.py
+│                   ├── search.py
+│                   ├── store.py
+│                   └── validator.py
 └── uv.lock
 ```
 
