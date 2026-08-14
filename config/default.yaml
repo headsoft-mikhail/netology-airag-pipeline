@@ -3,6 +3,7 @@ paths:
   prepared: data/prepared
   chunks: data/chunks
   embeddings: data/embeddings
+  vector_store: data/vector_store
 
 parsing:
   supported_formats:
@@ -29,3 +30,13 @@ chunking:
 
 embedding:
   model: "intfloat/multilingual-e5-base"
+
+vector_store:
+  collection_name: rag_chunks
+  recreate_collection: true
+  store_type: qdrant
+  distance: cosine
+  vectors_dimensions: 768
+  upload_batch_size: 100
+  search_top_k: 5
+  search_test_queries: 3

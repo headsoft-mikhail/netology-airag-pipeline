@@ -2,6 +2,8 @@ import datetime as dt
 import logging
 import typing
 
+from sentence_transformers import SentenceTransformer
+
 from rag.config import PipelineConfig
 from rag.manifest import ManifestManager, StagesEnum
 from rag.pipelines.embeddings.stages.embedding import EmbeddingModel, EmbeddingStage
@@ -16,14 +18,12 @@ class RAGEmbeddingsPipeline:
     def __init__(self, config: PipelineConfig):
         self.config: PipelineConfig = config
 
-        self.embedding_model = EmbeddingModel(
-            model_name=self.config.embedding.model,
-            transformer=self.config.embedding.transformer,
-        )
-        self.embedding_stage = EmbeddingStage(model=self.embedding_model)
+        transformer: typing.Final = SentenceTransformer(self.config.embedding.model)
+        embedding_model: typing.Final = EmbeddingModel(model_name=self.config.embedding.model, transformer=transformer)
+        self.embedding_stage = EmbeddingStage(model=embedding_model)
         self.validator = EmbeddingValidator(
-            model_name=self.embedding_model.model_name,
-            dimensions=self.embedding_model.dimensions,
+            model_name=embedding_model.model_name,
+            dimensions=embedding_model.dimensions,
         )
         self.manifest_manager = ManifestManager(config=self.config)
         self.exporter = EmbeddingExporter(output_dir=self.config.paths.embeddings)

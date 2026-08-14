@@ -9,7 +9,7 @@ from rag import models
 LOGGER_OBJ: typing.Final = logging.getLogger(__name__)
 
 
-@dataclasses.dataclass(frozen=True, slots=True)
+@dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
 class EmbeddingValidationMetrics:
     total_chunks: int
     total_embeddings: int
@@ -36,7 +36,7 @@ class EmbeddingValidationMetrics:
         )
 
 
-@dataclasses.dataclass(frozen=True, slots=True)
+@dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
 class EmbeddingValidator:
     model_name: str
     dimensions: int
@@ -46,7 +46,7 @@ class EmbeddingValidator:
         chunks: list[models.Chunk],
         embeddings: list[models.EmbeddedChunk],
     ) -> EmbeddingValidationMetrics:
-        chunks_by_key: typing.Final = {self._chunk_key(chunk): chunk for chunk in chunks}
+        chunks_by_key: typing.Final = {self._chunk_key(one_chunk): one_chunk for one_chunk in chunks}
 
         seen_keys: typing.Final[set[tuple[str, int]]] = set()
 
@@ -58,9 +58,9 @@ class EmbeddingValidator:
         lineage_errors_count = 0
         text_mismatch_count = 0
 
-        for embedded_chunk in embeddings:
-            metadata = embedded_chunk.metadata
-            key = self._embedded_chunk_key(embedded_chunk)
+        for one_embedded_chunk in embeddings:
+            metadata = one_embedded_chunk.metadata
+            key = self._embedded_chunk_key(one_embedded_chunk)
 
             if key in seen_keys:
                 duplicate_ids_count += 1
@@ -72,26 +72,26 @@ class EmbeddingValidator:
             if chunk is None:
                 lineage_errors_count += 1
             else:
-                if embedded_chunk.text != chunk.text:
+                if one_embedded_chunk.text != chunk.text:
                     text_mismatch_count += 1
 
                 if not self._validate_text_hash(
-                    text=embedded_chunk.text,
+                    text=one_embedded_chunk.text,
                     expected_hash=metadata.text_hash,
                 ):
                     invalid_metadata_count += 1
 
-            if not embedded_chunk.embedding:
+            if not one_embedded_chunk.embedding:
                 empty_embeddings_count += 1
                 continue
 
-            if not self._validate_values(embedded_chunk.embedding):
+            if not self._validate_values(one_embedded_chunk.embedding):
                 invalid_values_count += 1
 
-            if len(embedded_chunk.embedding) != self.dimensions:
+            if len(one_embedded_chunk.embedding) != self.dimensions:
                 invalid_dimensions_count += 1
 
-            if not self._validate_metadata(embedded_chunk):
+            if not self._validate_metadata(one_embedded_chunk):
                 invalid_metadata_count += 1
 
         metrics: typing.Final = EmbeddingValidationMetrics(
@@ -105,9 +105,7 @@ class EmbeddingValidator:
             lineage_errors_count=lineage_errors_count,
             text_mismatch_count=text_mismatch_count,
         )
-
         self._log_metrics(metrics)
-
         return metrics
 
     def _chunk_key(
@@ -119,25 +117,16 @@ class EmbeddingValidator:
             chunk.metadata.position,
         )
 
-    def _embedded_chunk_key(
-        self,
-        chunk: models.EmbeddedChunk,
-    ) -> tuple[str, int]:
+    def _embedded_chunk_key(self, embedded_chunk: models.EmbeddedChunk) -> tuple[str, int]:
         return (
-            chunk.metadata.document_id,
-            chunk.metadata.position,
+            embedded_chunk.metadata.document_id,
+            embedded_chunk.metadata.position,
         )
 
-    def _validate_values(
-        self,
-        embedding: list[float],
-    ) -> bool:
+    def _validate_values(self, embedding: list[float]) -> bool:
         return all(math.isfinite(value) for value in embedding)
 
-    def _validate_metadata(
-        self,
-        embedded_chunk: models.EmbeddedChunk,
-    ) -> bool:
+    def _validate_metadata(self, embedded_chunk: models.EmbeddedChunk) -> bool:
         metadata: typing.Final = embedded_chunk.metadata
 
         return (

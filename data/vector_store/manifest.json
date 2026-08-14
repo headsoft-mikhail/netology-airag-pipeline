@@ -16,7 +16,7 @@
       "normalization_unicode_form": "NFC"
     }
   },
-  "run_id": "c428e518-1d23-4e66-9e38-098ccd33a185",
+  "run_id": "7bcc7077-7301-4f11-8181-246f9664f15c",
   "chunk": {
     "run_id": "27bdce88-0010-43d8-a6b3-d0af5889efa4",
     "started_at": "2026-08-14T13:00:34.097950+00:00",
@@ -63,6 +63,32 @@
       "duplicate_ids_count": 0,
       "lineage_errors_count": 0,
       "text_mismatch_count": 0
+    }
+  },
+  "vector_store": {
+    "run_id": "26be4641-24ed-404e-aafb-1f516443ce3d",
+    "started_at": "2026-08-14T13:00:48.293564+00:00",
+    "created_at": "2026-08-14T13:00:48.353529+00:00",
+    "count": {
+      "input_embeddings": 51,
+      "stored_points": 51
+    },
+    "stage_config": {
+      "store_type": "qdrant",
+      "collection_name": "rag_chunks",
+      "vectors_dimensions": 768,
+      "distance": "cosine"
+    },
+    "validation": {
+      "input_embeddings_count": 51,
+      "stored_points_count": 51,
+      "invalid_dimensions_count": 0,
+      "empty_vectors_count": 0,
+      "invalid_vectors_count": 0,
+      "missing_text_count": 0,
+      "missing_chunk_id_count": 0,
+      "missing_document_id_count": 0,
+      "missing_metadata_count": 0
     }
   }
 }

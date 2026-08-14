@@ -13,6 +13,7 @@ from rag import models
 from rag.config import PipelineConfig
 from rag.pipelines.chunk.stages.validator import ChunkingValidationMetrics
 from rag.pipelines.embeddings.stages.validator import EmbeddingValidationMetrics
+from rag.pipelines.vector_store.stages.validator import VectorStoreValidationMetrics
 
 LOGGER_OBJ: typing.Final = logging.getLogger(__name__)
 
@@ -21,12 +22,15 @@ class StagesEnum(enum.Enum):
     PREPARE = "prepare"
     CHUNK = "chunk"
     EMBEDDING = "embedding"
+    VECTOR_STORE = "vector_store"
 
     def previous(self) -> "StagesEnum | None":
         if self == StagesEnum.CHUNK:
             return StagesEnum.PREPARE
         elif self == StagesEnum.EMBEDDING:
             return StagesEnum.CHUNK
+        elif self == StagesEnum.VECTOR_STORE:
+            return StagesEnum.EMBEDDING
         return None
 
 
@@ -41,8 +45,6 @@ class ManifestCreatorProtocol(abc.ABC):
 
 @dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
 class PrepareManifest(ManifestCreatorProtocol):
-    config: PipelineConfig
-
     def create(self, *, started_at: str, **kwargs) -> dict[str, typing.Any]:
         raw_documents: typing.Final[list[models.SourceDocument]] = kwargs["raw_documents"]
         deduplication_result: typing.Final[models.DeduplicationResult] = kwargs["deduplication_result"]
@@ -59,7 +61,7 @@ class PrepareManifest(ManifestCreatorProtocol):
                 "exact_duplicates": deduplication_result.exact_duplicates,
                 "near_duplicates": deduplication_result.near_duplicates,
             },
-            "config": {
+            "stage_config": {
                 "deduplication_similarity_threshold": self.config.deduplication.similarity_threshold,
                 "normalization_unicode_form": self.config.normalization.unicode_form,
             },
@@ -70,8 +72,6 @@ class PrepareManifest(ManifestCreatorProtocol):
 
 @dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
 class ChunkingManifest(ManifestCreatorProtocol):
-    config: PipelineConfig
-
     def create(self, *, started_at: str, **kwargs) -> dict[str, typing.Any]:
         prepared_documents: typing.Final[list[models.PreparedDocument]] = kwargs["prepared_documents"]
         chunks: typing.Final[list[models.Chunk]] = kwargs["chunks"]
@@ -85,12 +85,12 @@ class ChunkingManifest(ManifestCreatorProtocol):
                 "input_documents": len(prepared_documents),
                 "output_chunks": len(chunks),
             },
-            "validation": dataclasses.asdict(validation_metrics),
-            "config": {
+            "stage_config": {
                 "strategy": self.config.chunking.strategy,
                 "chunk_size": self.config.chunking.chunk_size,
                 "chunk_overlap": self.config.chunking.chunk_overlap,
             },
+            "validation": dataclasses.asdict(validation_metrics),
         }
         LOGGER_OBJ.info("Manifest prepared.")
         return manifest
@@ -98,8 +98,6 @@ class ChunkingManifest(ManifestCreatorProtocol):
 
 @dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
 class EmbeddingManifest(ManifestCreatorProtocol):
-    config: PipelineConfig
-
     def create(self, *, started_at: str, **kwargs) -> dict[str, typing.Any]:
         chunks: typing.Final[list[models.Chunk]] = kwargs["chunks"]
         embedded_chunks: typing.Final[list[models.EmbeddedChunk]] = kwargs["embedded_chunks"]
@@ -113,9 +111,36 @@ class EmbeddingManifest(ManifestCreatorProtocol):
                 "input_chunks": len(chunks),
                 "output_embeddings": len(embedded_chunks),
             },
-            "embedding": {
+            "stage_config": {
                 "model": embedded_chunks[0].metadata.embedding_model if embedded_chunks else None,
                 "dimensions": embedded_chunks[0].metadata.embedding_dimensions if embedded_chunks else None,
+            },
+            "validation": dataclasses.asdict(validation_metrics),
+        }
+
+        LOGGER_OBJ.info("Manifest prepared.")
+        return manifest
+
+
+@dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
+class VectorStoreManifest(ManifestCreatorProtocol):
+    def create(self, *, started_at: str, **kwargs) -> dict[str, typing.Any]:
+        embedded_chunks: typing.Final[list[models.EmbeddedChunk]] = kwargs["embedded_chunks"]
+        validation_metrics: typing.Final[VectorStoreValidationMetrics] = kwargs["validation_metrics"]
+
+        manifest: typing.Final = {
+            "run_id": str(uuid.uuid4()),
+            "started_at": started_at,
+            "created_at": dt.datetime.now(tz=dt.UTC).isoformat(),
+            "count": {
+                "input_embeddings": len(embedded_chunks),
+                "stored_points": validation_metrics.stored_points_count,
+            },
+            "stage_config": {
+                "store_type": self.config.vector_store.store_type,
+                "collection_name": self.config.vector_store.collection_name,
+                "vectors_dimensions": self.config.vector_store.vectors_dimensions,
+                "distance": self.config.vector_store.distance,
             },
             "validation": dataclasses.asdict(validation_metrics),
         }
@@ -135,6 +160,8 @@ class ManifestManager:
             return self.config.paths.chunks
         elif stage == StagesEnum.EMBEDDING:
             return self.config.paths.embeddings
+        elif stage == StagesEnum.VECTOR_STORE:
+            return self.config.paths.vector_store
 
     def _select_stage_manifest_creator(self, stage: StagesEnum) -> ManifestCreatorProtocol:
         if stage == StagesEnum.PREPARE:
@@ -143,6 +170,8 @@ class ManifestManager:
             return ChunkingManifest(config=self.config)
         elif stage == StagesEnum.EMBEDDING:
             return EmbeddingManifest(config=self.config)
+        elif stage == StagesEnum.VECTOR_STORE:
+            return VectorStoreManifest(config=self.config)
 
     def load(self, stage: StagesEnum) -> dict[str, typing.Any]:
         path: typing.Final = self._select_path(stage) / "manifest.json"

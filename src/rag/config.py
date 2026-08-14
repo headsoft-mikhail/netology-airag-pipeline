@@ -11,6 +11,7 @@ class PathsConfig(pydantic.BaseModel):
     prepared: Path
     chunks: Path
     embeddings: Path
+    vector_store: Path
 
     @property
     def prepared_jsonl(self) -> Path:
@@ -19,6 +20,10 @@ class PathsConfig(pydantic.BaseModel):
     @property
     def chunks_jsonl(self) -> Path:
         return Path(self.chunks, "chunks.jsonl")
+
+    @property
+    def embeddings_jsonl(self) -> Path:
+        return Path(self.embeddings, "embeddings.jsonl")
 
 
 class ParsingConfig(pydantic.BaseModel):
@@ -59,11 +64,16 @@ class ChunkingConfig(pydantic.BaseModel):
 class EmbeddingConfig(pydantic.BaseModel):
     model: str = "intfloat/multilingual-e5-base"
 
-    @property
-    def transformer(self):
-        from sentence_transformers import SentenceTransformer
 
-        return SentenceTransformer(self.model)
+class VectorStoreConfig(pydantic.BaseModel):
+    collection_name: str
+    vectors_dimensions: int
+    store_type: str
+    distance: typing.Literal["cosine", "dot", "euclid", "manhattan"]
+    upload_batch_size: int = pydantic.Field(gt=0)
+    search_top_k: int = pydantic.Field(gt=0)
+    search_test_queries: int = pydantic.Field(gt=0)
+    recreate_collection: bool = True
 
 
 class PipelineConfig(pydantic.BaseModel):
@@ -74,6 +84,7 @@ class PipelineConfig(pydantic.BaseModel):
     deduplication: DeduplicationConfig
     chunking: ChunkingConfig
     embedding: EmbeddingConfig
+    vector_store: VectorStoreConfig
 
 
 def load_config(path: Path) -> PipelineConfig:

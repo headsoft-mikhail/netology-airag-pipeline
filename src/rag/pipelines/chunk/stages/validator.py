@@ -11,7 +11,7 @@ from rag.config import ChunkingConfig
 LOGGER_OBJ: typing.Final = logging.getLogger(__name__)
 
 
-@dataclasses.dataclass(frozen=True, slots=True)
+@dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
 class ChunkingValidationMetrics:
     total_chunks: int
     empty_chunks_count: int
@@ -37,7 +37,7 @@ class ChunkingValidationMetrics:
         )
 
 
-@dataclasses.dataclass(frozen=True, slots=True)
+@dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
 class ChunkValidator:
     config: ChunkingConfig
     _SENTENCE_PATTERN: typing.Final = re.compile(r"(?<=[.!?])(?:[»”\"])?\s+")
@@ -103,9 +103,7 @@ class ChunkValidator:
             lineage_errors_count=lineage_errors_count,
             overlap_errors_count=overlap_errors_count,
         )
-
         self._log_metrics(metrics)
-
         return metrics
 
     def _minimum_chunk_tokens(self) -> int:
