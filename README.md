@@ -8,16 +8,16 @@
 
 ## Содержание
 - [Возможности](#Возможности)
-- [Структура проекта](#Структура проекта)
-- [Этапы prepare-pipeline](#Этапы prepare-pipeline)
-- [Этапы chunk-pipeline](#Этапы chunk-pipeline)
-- [Этапы embeddings-pipeline](#Этапы embeddings-pipeline)
-- [Этапы vector-store-pipeline](#Этапы vector-store-pipeline)
-- [Этапы evaluation](#Этапы evaluation)
-- [Этапы evaluation](#Этапы evaluation)
+- [Структура проекта](#Структура-проекта)
+- [Этапы prepare-pipeline](#Этапы-prepare-pipeline)
+- [Этапы chunk-pipeline](#Этапы-chunk-pipeline)
+- [Этапы embeddings-pipeline](#Этапы-embeddings-pipeline)
+- [Этапы vector-store-pipeline](#Этапы-vector-store-pipeline)
+- [Этапы evaluation](#Этапы-evaluation)
+- [Этапы evaluation](#Этапы-evaluation)
 - [Конфигурация](#Конфигурация)
-- [Исходные данные](#Исходные данные)
-- [Установка и запуск](#Установка и запуск)
+- [Исходные данные](#Исходные-данные)
+- [Установка и запуск](#Установка-и-запуск)
 
 ## Возможности
 
