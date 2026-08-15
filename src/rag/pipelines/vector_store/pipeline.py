@@ -8,7 +8,7 @@ from rag.config import PipelineConfig
 from rag.manifest import ManifestManager, StagesEnum
 from rag.pipelines.vector_store.stages.exporter import VectorStoreExporter
 from rag.pipelines.vector_store.stages.loader import load_embeddings
-from rag.pipelines.vector_store.stages.search import QdrantSearcher
+from rag.pipelines.vector_store.stages.search import VectorStoreSearcher
 from rag.pipelines.vector_store.stages.store import QdrantStore
 from rag.pipelines.vector_store.stages.validator import VectorStoreValidator
 
@@ -22,7 +22,7 @@ class RAGVectorStorePipeline:
         store_client: typing.Final = QdrantClient(path=str(self.config.paths.vector_store))
         self.store = QdrantStore(config=self.config.vector_store, client=store_client)
         self.validator = VectorStoreValidator(config=self.config.vector_store)
-        self.searcher: typing.Final = QdrantSearcher(config=self.config.vector_store, client=store_client)
+        self.searcher: typing.Final = VectorStoreSearcher(config=self.config.vector_store, client=store_client)
         self.manifest_manager = ManifestManager(config=self.config)
         self.exporter: typing.Final = VectorStoreExporter(output_dir=self.config.paths.vector_store)
 
@@ -46,7 +46,7 @@ class RAGVectorStorePipeline:
             )
             LOGGER_OBJ.info("Validation - DONE!\n-------------")
 
-            search_results: typing.Final = self.searcher.search(embedded_chunks=embedded_chunks)
+            search_results: typing.Final = self.searcher.search_batch(embedded_chunks=embedded_chunks)
             LOGGER_OBJ.info("Search - DONE!\n-------------")
         finally:
             self.store.close()

@@ -1,0 +1,602 @@
+[
+  {
+    "query": "Какой гарантийный срок на оборудование?",
+    "answer": "Гарантийный срок на оборудование составляет 24 месяца с даты покупки.",
+    "top_k": [
+      {
+        "id": "bbd45319-79ec-5001-aa0f-114bbfea3abb",
+        "version": 0,
+        "score": 0.8678232786280999,
+        "payload": {
+          "chunk_id": "ff8981026865f059622a2b3f0176b2ff11f68a5929365e78c2205cbdca684347",
+          "text": "Гарантийная политика Гарантийный срок на оборудование составляет 24 месяца с даты покупки. Для аккумуляторных батарей гарантийный срок составляет 12 месяцев. Гарантийный ремонт выполняется бесплатно, если неисправность возникла вследствие производственного дефекта. Срок диагностики устройства составляет до 10 рабочих дней. Если ремонт невозможен, устройство может быть заменено на аналогичное. Решение о замене принимается после завершения диагностики.",
+          "document_id": "633489c470fe50f17e12d8c857a3d2ec1391eca64a5e954cef8bf25c1188d2e5",
+          "position": 0,
+          "chunk_token_count": 199,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/warranty_policy.txt",
+          "section": null,
+          "text_hash": "4af41838dac79389c3f3ae99a7104f19816c87169dd3d36fcc6ba6dc8a6aa157",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "f0de25f0-73b3-556d-9057-db4ab64acaa3",
+        "version": 0,
+        "score": 0.834021023683758,
+        "payload": {
+          "chunk_id": "bb9f6a5ef8ec73a2455bfa210fce6b5b3d89f3a209580874e6a8a560eb080470",
+          "text": "Решение о замене принимается после завершения диагностики. Стоимость доставки устройства в авторизованный сервисный центр составляет 15 евро. При подтверждении гарантийного случая стоимость доставки компенсируется. Гарантия не распространяется на повреждения, вызванные попаданием жидкости, механическими повреждениями или использованием несовместимого блока питания. Дата вступления политики в силу: 1 января 2026 года. Дата последнего обновления: 15 марта 2026 года.",
+          "document_id": "633489c470fe50f17e12d8c857a3d2ec1391eca64a5e954cef8bf25c1188d2e5",
+          "position": 1,
+          "chunk_token_count": 202,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/warranty_policy.txt",
+          "section": null,
+          "text_hash": "45c02720d9286846052d1dad7c6e34f95217efaf28aa959e6405b8dcf682d436",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "e1fa52ff-ea9a-513f-9309-e57c91e71c69",
+        "version": 0,
+        "score": 0.8213547969665357,
+        "payload": {
+          "chunk_id": "0318a0066e318ed9867f1b33452ff41a334c6ed9e698c94eb981c31186545873",
+          "text": "Журналы событий безопасности высокого уровня хранятся не менее 2 лет. 9. Стоимость оборудования безопасности Для аппаратной MFA компания использует ключи YubiKey 5 NFC. Установочная стоимость одного ключа для сотрудников составляет 7 490 рублей. Для администраторов закупается расширенная модель стоимостью 12 990 рублей за устройство. Плановый бюджет на закупку оборудования MFA на 2026 год составляет 389 700 рублей.",
+          "document_id": "d07978809d9a8c18044a7cbd198b498fadf53a5a111a12a530240b41d7fc6290",
+          "position": 8,
+          "chunk_token_count": 181,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/security_policy.txt",
+          "section": null,
+          "text_hash": "ad08a57f8c6164edae35f70b6e5ff388c6558ad1fb928058bde4779d2c51c6c5",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      }
+    ]
+  },
+  {
+    "query": "Какое время понадобится на диагностику?",
+    "answer": "Срок диагностики устройства составляет до 10 рабочих дней.",
+    "top_k": [
+      {
+        "id": "bbd45319-79ec-5001-aa0f-114bbfea3abb",
+        "version": 0,
+        "score": 0.8306691807041922,
+        "payload": {
+          "chunk_id": "ff8981026865f059622a2b3f0176b2ff11f68a5929365e78c2205cbdca684347",
+          "text": "Гарантийная политика Гарантийный срок на оборудование составляет 24 месяца с даты покупки. Для аккумуляторных батарей гарантийный срок составляет 12 месяцев. Гарантийный ремонт выполняется бесплатно, если неисправность возникла вследствие производственного дефекта. Срок диагностики устройства составляет до 10 рабочих дней. Если ремонт невозможен, устройство может быть заменено на аналогичное. Решение о замене принимается после завершения диагностики.",
+          "document_id": "633489c470fe50f17e12d8c857a3d2ec1391eca64a5e954cef8bf25c1188d2e5",
+          "position": 0,
+          "chunk_token_count": 199,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/warranty_policy.txt",
+          "section": null,
+          "text_hash": "4af41838dac79389c3f3ae99a7104f19816c87169dd3d36fcc6ba6dc8a6aa157",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "f0de25f0-73b3-556d-9057-db4ab64acaa3",
+        "version": 0,
+        "score": 0.8163921451241068,
+        "payload": {
+          "chunk_id": "bb9f6a5ef8ec73a2455bfa210fce6b5b3d89f3a209580874e6a8a560eb080470",
+          "text": "Решение о замене принимается после завершения диагностики. Стоимость доставки устройства в авторизованный сервисный центр составляет 15 евро. При подтверждении гарантийного случая стоимость доставки компенсируется. Гарантия не распространяется на повреждения, вызванные попаданием жидкости, механическими повреждениями или использованием несовместимого блока питания. Дата вступления политики в силу: 1 января 2026 года. Дата последнего обновления: 15 марта 2026 года.",
+          "document_id": "633489c470fe50f17e12d8c857a3d2ec1391eca64a5e954cef8bf25c1188d2e5",
+          "position": 1,
+          "chunk_token_count": 202,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/warranty_policy.txt",
+          "section": null,
+          "text_hash": "45c02720d9286846052d1dad7c6e34f95217efaf28aa959e6405b8dcf682d436",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "2abaf476-f17d-5bb2-878f-52dc81ba3552",
+        "version": 0,
+        "score": 0.8130986967990401,
+        "payload": {
+          "chunk_id": "32326827a9994047accade7dbcc3dfd11b132ed7083f400a4cfc60b8f9450ff6",
+          "text": "Не устанавливайте модули с чрезмерным усилием. Если модуль не входит в слот, проверьте его ориентацию и соответствие типу разъёма. Проверка после установки После установки подключите питание и включите компьютер. Первый запуск после изменения конфигурации памяти может занимать больше времени, чем обычно. Откройте BIOS или UEFI и проверьте, что установленный объём оперативной памяти определяется правильно. После загрузки операционной системы проверьте объём доступной памяти в системных настройках.",
+          "document_id": "f20a62680dfa3b5b6027e9964ee0c6ee388026bbf33da71eb459fe6e7bc00a22",
+          "position": 5,
+          "chunk_token_count": 197,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/memory_installation.txt",
+          "section": null,
+          "text_hash": "9ae95bfbd4eba97397bffee985374e760032a84b7f87e0c11d62beb8f71cb162",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      }
+    ]
+  },
+  {
+    "query": "Сколько стоит доставка в сервисный центр?",
+    "answer": "Стоимость доставки в сервисный центр составляет **15 евро**.",
+    "top_k": [
+      {
+        "id": "f0de25f0-73b3-556d-9057-db4ab64acaa3",
+        "version": 0,
+        "score": 0.8520759996786096,
+        "payload": {
+          "chunk_id": "bb9f6a5ef8ec73a2455bfa210fce6b5b3d89f3a209580874e6a8a560eb080470",
+          "text": "Решение о замене принимается после завершения диагностики. Стоимость доставки устройства в авторизованный сервисный центр составляет 15 евро. При подтверждении гарантийного случая стоимость доставки компенсируется. Гарантия не распространяется на повреждения, вызванные попаданием жидкости, механическими повреждениями или использованием несовместимого блока питания. Дата вступления политики в силу: 1 января 2026 года. Дата последнего обновления: 15 марта 2026 года.",
+          "document_id": "633489c470fe50f17e12d8c857a3d2ec1391eca64a5e954cef8bf25c1188d2e5",
+          "position": 1,
+          "chunk_token_count": 202,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/warranty_policy.txt",
+          "section": null,
+          "text_hash": "45c02720d9286846052d1dad7c6e34f95217efaf28aa959e6405b8dcf682d436",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "bbd45319-79ec-5001-aa0f-114bbfea3abb",
+        "version": 0,
+        "score": 0.7863352302800476,
+        "payload": {
+          "chunk_id": "ff8981026865f059622a2b3f0176b2ff11f68a5929365e78c2205cbdca684347",
+          "text": "Гарантийная политика Гарантийный срок на оборудование составляет 24 месяца с даты покупки. Для аккумуляторных батарей гарантийный срок составляет 12 месяцев. Гарантийный ремонт выполняется бесплатно, если неисправность возникла вследствие производственного дефекта. Срок диагностики устройства составляет до 10 рабочих дней. Если ремонт невозможен, устройство может быть заменено на аналогичное. Решение о замене принимается после завершения диагностики.",
+          "document_id": "633489c470fe50f17e12d8c857a3d2ec1391eca64a5e954cef8bf25c1188d2e5",
+          "position": 0,
+          "chunk_token_count": 199,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/warranty_policy.txt",
+          "section": null,
+          "text_hash": "4af41838dac79389c3f3ae99a7104f19816c87169dd3d36fcc6ba6dc8a6aa157",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "e1fa52ff-ea9a-513f-9309-e57c91e71c69",
+        "version": 0,
+        "score": 0.7839223036812797,
+        "payload": {
+          "chunk_id": "0318a0066e318ed9867f1b33452ff41a334c6ed9e698c94eb981c31186545873",
+          "text": "Журналы событий безопасности высокого уровня хранятся не менее 2 лет. 9. Стоимость оборудования безопасности Для аппаратной MFA компания использует ключи YubiKey 5 NFC. Установочная стоимость одного ключа для сотрудников составляет 7 490 рублей. Для администраторов закупается расширенная модель стоимостью 12 990 рублей за устройство. Плановый бюджет на закупку оборудования MFA на 2026 год составляет 389 700 рублей.",
+          "document_id": "d07978809d9a8c18044a7cbd198b498fadf53a5a111a12a530240b41d7fc6290",
+          "position": 8,
+          "chunk_token_count": 181,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/security_policy.txt",
+          "section": null,
+          "text_hash": "ad08a57f8c6164edae35f70b6e5ff388c6558ad1fb928058bde4779d2c51c6c5",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      }
+    ]
+  },
+  {
+    "query": "Когда вступила в силу политика IS-2026/04?",
+    "answer": "Информации недостаточно.",
+    "top_k": [
+      {
+        "id": "0b52cfec-9953-5515-a1eb-9e949ae5f7ae",
+        "version": 0,
+        "score": 0.8096471883470928,
+        "payload": {
+          "chunk_id": "71a65f9e40e50da53cda613811eac7551d013fa82e754cd1bbb5c8e4f3b5082f",
+          "text": "Политика информационной безопасности компании «ТехноСфера» Версия: 3.2 Дата утверждения: 15 марта 2026 года Дата вступления в силу: 1 апреля 2026 года Ответственный подраздел: отдел информационной безопасности 1. Общие положения Настоящая политика устанавливает требования к защите информационных систем, учетных записей и рабочих данных компании. Политика распространяется на всех сотрудников, подрядчиков и пользователей корпоративных информационных систем.",
+          "document_id": "d07978809d9a8c18044a7cbd198b498fadf53a5a111a12a530240b41d7fc6290",
+          "position": 0,
+          "chunk_token_count": 188,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/security_policy.txt",
+          "section": null,
+          "text_hash": "04224d87435439f25953c84b41cc6eb2cdd4bd160723fdc4d210aed78329bfca",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "bcde45dc-80eb-5ccd-86f4-e057b1eae98a",
+        "version": 0,
+        "score": 0.7872530283015764,
+        "payload": {
+          "chunk_id": "33b2ffa3c9e3075a86ed4825b73793fd240b23f9ef0e34ccfbc51bcf5d5580a3",
+          "text": "Политика распространяется на всех сотрудников, подрядчиков и пользователей корпоративных информационных систем. Основным нормативным документом компании является внутренний регламент ИБ-2026/03, утвержденный приказом № 47-ИБ от 15 марта 2026 года. 2. Пароли Минимальная длина пароля корпоративной учетной записи составляет 14 символов. Пароль должен содержать как минимум: - одну заглавную букву; - одну строчную букву; - одну цифру; - один специальный символ. Срок действия пароля составляет 180 дней.",
+          "document_id": "d07978809d9a8c18044a7cbd198b498fadf53a5a111a12a530240b41d7fc6290",
+          "position": 1,
+          "chunk_token_count": 220,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/security_policy.txt",
+          "section": null,
+          "text_hash": "9a7805b023a92b95dd4e67b7fe5ea37dd4773090c8d4cf78cdf15ec44ff19ebf",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "f0de25f0-73b3-556d-9057-db4ab64acaa3",
+        "version": 0,
+        "score": 0.7850205968164059,
+        "payload": {
+          "chunk_id": "bb9f6a5ef8ec73a2455bfa210fce6b5b3d89f3a209580874e6a8a560eb080470",
+          "text": "Решение о замене принимается после завершения диагностики. Стоимость доставки устройства в авторизованный сервисный центр составляет 15 евро. При подтверждении гарантийного случая стоимость доставки компенсируется. Гарантия не распространяется на повреждения, вызванные попаданием жидкости, механическими повреждениями или использованием несовместимого блока питания. Дата вступления политики в силу: 1 января 2026 года. Дата последнего обновления: 15 марта 2026 года.",
+          "document_id": "633489c470fe50f17e12d8c857a3d2ec1391eca64a5e954cef8bf25c1188d2e5",
+          "position": 1,
+          "chunk_token_count": 202,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/warranty_policy.txt",
+          "section": null,
+          "text_hash": "45c02720d9286846052d1dad7c6e34f95217efaf28aa959e6405b8dcf682d436",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      }
+    ]
+  },
+  {
+    "query": "Как часто должны создаваться резервные копии?",
+    "answer": "Резервные копии должны создаваться не реже чем **один раз в неделю** (еженедельно).",
+    "top_k": [
+      {
+        "id": "ee7b4128-7d89-53e5-a345-8914d2ee8220",
+        "version": 0,
+        "score": 0.8499685649950924,
+        "payload": {
+          "chunk_id": "db9e785ec9b0cc63f2056c5d8a6a9c83e26471fb05620e60308e0780e6e5537f",
+          "text": "Еженедельные резервные копии хранятся 6 месяцев. Ежегодная архивная копия хранится 5 лет. Не менее одной копии критических данных должна находиться на физически изолированном носителе. Проверка восстановления из резервной копии выполняется не реже одного раза в квартал. 5. Хранение данных Рабочие документы должны храниться в корпоративном хранилище. Использование личных облачных хранилищ для корпоративных данных запрещено. Данные с ограниченным доступом должны храниться в зашифрованном виде.",
+          "document_id": "d07978809d9a8c18044a7cbd198b498fadf53a5a111a12a530240b41d7fc6290",
+          "position": 4,
+          "chunk_token_count": 212,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/security_policy.txt",
+          "section": null,
+          "text_hash": "4e376e4d28d76b27e02ae7c93c3581e83b8477cdf036ca580053c033b511ac3d",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "0381da0a-4cc6-578c-b45c-64ef6d2f5fcf",
+        "version": 0,
+        "score": 0.8385414982661187,
+        "payload": {
+          "chunk_id": "4727c95dde3a84f25c470ed7446d7104860676899eacf70135ab3e4d25ff29ef",
+          "text": "Для важных данных желательно использовать несколько копий на разных носителях. Одна из копий может храниться на внешнем диске или удалённом сервере. Проверка резервных копий Создание резервной копии не гарантирует возможность восстановления данных. Периодически проверяйте наличие файлов и выполняйте тестовое восстановление. Если резервное копирование выполняется автоматически, проверьте расписание и убедитесь, что предыдущие задания завершились без ошибок. Рекомендации Для важных данных используйте автоматическое резервное копирование.",
+          "document_id": "0c6bb8b97bf547e85b6056e1be47591a53eac9ddcc93e46e2d40eaf475e562f0",
+          "position": 3,
+          "chunk_token_count": 204,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/backup_guide.txt",
+          "section": null,
+          "text_hash": "856fbd0caa66bf3e3bc6748dac51d5bdfa30873567a8978102b58c9c3db24682",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "6241b41b-8ba0-5b91-9158-7fce7c326a58",
+        "version": 0,
+        "score": 0.8351546699166671,
+        "payload": {
+          "chunk_id": "a23de10a2e871804cc250a519e9736898e0c9878fd721bea8c72f462df84498e",
+          "text": "Рекомендации Для важных данных используйте автоматическое резервное копирование. Храните несколько версий файлов, чтобы иметь возможность восстановить данные до момента возникновения проблемы. Создавайте резрвные копии не реже чем 1 раз в неделю. Перед заменой системного диска или переустановкой операционной системы убедитесь, что необходимые данные доступны из резервной копии.",
+          "document_id": "0c6bb8b97bf547e85b6056e1be47591a53eac9ddcc93e46e2d40eaf475e562f0",
+          "position": 4,
+          "chunk_token_count": 144,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/backup_guide.txt",
+          "section": null,
+          "text_hash": "2f6b1535db4d36355e8f7ffae3b7e251660d0a3b73639e19fc02613eb924d5f1",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      }
+    ]
+  },
+  {
+    "query": "Как часто нужно менять пароль?",
+    "answer": "Пароль необходимо менять каждые 180 дней.",
+    "top_k": [
+      {
+        "id": "0143e7b8-e542-51b1-8879-47fe0ff7449d",
+        "version": 0,
+        "score": 0.830826481005027,
+        "payload": {
+          "chunk_id": "fa222a084ee47484be52f22610c0966da5875c5ab2cfc3929801e519c187e431",
+          "text": "Срок действия пароля составляет 180 дней. Повторное использование последних 10 паролей запрещено. После 5 последовательных неудачных попыток входа учетная запись блокируется на 30 минут. 3. Многофакторная аутентификация Многофакторная аутентификация обязательна для: - учетных записей администраторов; - удаленного доступа к корпоративной сети; - доступа к системам, содержащим персональные данные; - доступа к финансовым системам. Для обычных внутренних учетных записей MFA должна быть включена до 1 июня 2026 года.",
+          "document_id": "d07978809d9a8c18044a7cbd198b498fadf53a5a111a12a530240b41d7fc6290",
+          "position": 2,
+          "chunk_token_count": 210,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/security_policy.txt",
+          "section": null,
+          "text_hash": "4bf60e5d2c2d5b4b061fc459281fa0adb7fa513b796c487b4d0a8ceeaa456b0b",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "6241b41b-8ba0-5b91-9158-7fce7c326a58",
+        "version": 0,
+        "score": 0.8120024809815811,
+        "payload": {
+          "chunk_id": "a23de10a2e871804cc250a519e9736898e0c9878fd721bea8c72f462df84498e",
+          "text": "Рекомендации Для важных данных используйте автоматическое резервное копирование. Храните несколько версий файлов, чтобы иметь возможность восстановить данные до момента возникновения проблемы. Создавайте резрвные копии не реже чем 1 раз в неделю. Перед заменой системного диска или переустановкой операционной системы убедитесь, что необходимые данные доступны из резервной копии.",
+          "document_id": "0c6bb8b97bf547e85b6056e1be47591a53eac9ddcc93e46e2d40eaf475e562f0",
+          "position": 4,
+          "chunk_token_count": 144,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/backup_guide.txt",
+          "section": null,
+          "text_hash": "2f6b1535db4d36355e8f7ffae3b7e251660d0a3b73639e19fc02613eb924d5f1",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "db421533-a1b8-5ada-b3d9-5091bd792724",
+        "version": 0,
+        "score": 0.8073819802339239,
+        "payload": {
+          "chunk_id": "09c1ade1e5e596d99e1e44477f21d29f3003b6736561c352253853bbd32de45c",
+          "text": "Права доступа пересматриваются не реже одного раза в 90 дней. После увольнения сотрудника его корпоративные учетные записи должны быть заблокированы не позднее 4 часов после получения уведомления об увольнении. 8. Сроки хранения журналов Журналы аутентификации хранятся не менее 180 дней. Журналы действий администраторов хранятся не менее 365 дней. Журналы событий безопасности высокого уровня хранятся не менее 2 лет. 9.",
+          "document_id": "d07978809d9a8c18044a7cbd198b498fadf53a5a111a12a530240b41d7fc6290",
+          "position": 7,
+          "chunk_token_count": 195,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/security_policy.txt",
+          "section": null,
+          "text_hash": "280b29593dbfd1150602ab4ed9b04148b3065285ccb57819ea495272dc0ae67d",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      }
+    ]
+  },
+  {
+    "query": "Сколько хранятся резервные копии?",
+    "answer": "Еженедельные резервные копии хранятся **6 месяцев**, а ежегодная архивная копия – **5 лет**. Кроме того, по политике должно быть **не менее одной** копии критических данных на физически изолированном носителе.",
+    "top_k": [
+      {
+        "id": "ee7b4128-7d89-53e5-a345-8914d2ee8220",
+        "version": 0,
+        "score": 0.8636825027310389,
+        "payload": {
+          "chunk_id": "db9e785ec9b0cc63f2056c5d8a6a9c83e26471fb05620e60308e0780e6e5537f",
+          "text": "Еженедельные резервные копии хранятся 6 месяцев. Ежегодная архивная копия хранится 5 лет. Не менее одной копии критических данных должна находиться на физически изолированном носителе. Проверка восстановления из резервной копии выполняется не реже одного раза в квартал. 5. Хранение данных Рабочие документы должны храниться в корпоративном хранилище. Использование личных облачных хранилищ для корпоративных данных запрещено. Данные с ограниченным доступом должны храниться в зашифрованном виде.",
+          "document_id": "d07978809d9a8c18044a7cbd198b498fadf53a5a111a12a530240b41d7fc6290",
+          "position": 4,
+          "chunk_token_count": 212,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/security_policy.txt",
+          "section": null,
+          "text_hash": "4e376e4d28d76b27e02ae7c93c3581e83b8477cdf036ca580053c033b511ac3d",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "c437b5f3-67bb-5db3-a9a7-2890c67487b2",
+        "version": 0,
+        "score": 0.8483557508374986,
+        "payload": {
+          "chunk_id": "a26dcf504cd2c1f5d28244ee04406ea227221ae7c8b22269a25586b97fbd579b",
+          "text": "Такой подход позволяет экономить место, однако восстановление может потребовать несколько наборов резервных данных. Дифференциальная резервная копия содержит изменения относительно последней полной копии. Хранение копий Не рекомендуется хранить единственную резервную копию на том же физическом диске, где находятся исходные данные. При повреждении диска одновременно могут быть потеряны и оригиналы, и резервная копия. Для важных данных желательно использовать несколько копий на разных носителях.",
+          "document_id": "0c6bb8b97bf547e85b6056e1be47591a53eac9ddcc93e46e2d40eaf475e562f0",
+          "position": 2,
+          "chunk_token_count": 206,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/backup_guide.txt",
+          "section": null,
+          "text_hash": "95d7d918e16ca49064931dc81a091e48a5f5ad4e16bc152b7f56f03150f6576c",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "7fd16a56-354c-56ec-9974-1482cce91237",
+        "version": 0,
+        "score": 0.8386141215119554,
+        "payload": {
+          "chunk_id": "958680897045bf200f7d2d251e21cec6620aa284638141e934ebdac6774cc490",
+          "text": "Файлы операционной системы обычно не требуется копировать вручную, если для восстановления используется штатный механизм резервного копирования или заранее подготовленный образ системы. Типы резервных копий Полная резервная копия содержит все выбранные данные. Она проще для восстановления, но требует больше места и времени. Инкрементальная резервная копия сохраняет изменения, произошедшие после предыдущей резервной копии. Такой подход позволяет экономить место, однако восстановление может потребовать несколько наборов резервных данных.",
+          "document_id": "0c6bb8b97bf547e85b6056e1be47591a53eac9ddcc93e46e2d40eaf475e562f0",
+          "position": 1,
+          "chunk_token_count": 216,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/backup_guide.txt",
+          "section": null,
+          "text_hash": "e8e4b62c23228bc9088430eeb47532b7430f6154988e2226858f149c6788c25b",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      }
+    ]
+  },
+  {
+    "query": "Сколько стоит страхование жизни?",
+    "answer": "Информации о стоимости страхования жизни в предоставленном контексте нет.",
+    "top_k": [
+      {
+        "id": "e1fa52ff-ea9a-513f-9309-e57c91e71c69",
+        "version": 0,
+        "score": 0.8115863772728131,
+        "payload": {
+          "chunk_id": "0318a0066e318ed9867f1b33452ff41a334c6ed9e698c94eb981c31186545873",
+          "text": "Журналы событий безопасности высокого уровня хранятся не менее 2 лет. 9. Стоимость оборудования безопасности Для аппаратной MFA компания использует ключи YubiKey 5 NFC. Установочная стоимость одного ключа для сотрудников составляет 7 490 рублей. Для администраторов закупается расширенная модель стоимостью 12 990 рублей за устройство. Плановый бюджет на закупку оборудования MFA на 2026 год составляет 389 700 рублей.",
+          "document_id": "d07978809d9a8c18044a7cbd198b498fadf53a5a111a12a530240b41d7fc6290",
+          "position": 8,
+          "chunk_token_count": 181,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/security_policy.txt",
+          "section": null,
+          "text_hash": "ad08a57f8c6164edae35f70b6e5ff388c6558ad1fb928058bde4779d2c51c6c5",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "f0de25f0-73b3-556d-9057-db4ab64acaa3",
+        "version": 0,
+        "score": 0.7886336283349096,
+        "payload": {
+          "chunk_id": "bb9f6a5ef8ec73a2455bfa210fce6b5b3d89f3a209580874e6a8a560eb080470",
+          "text": "Решение о замене принимается после завершения диагностики. Стоимость доставки устройства в авторизованный сервисный центр составляет 15 евро. При подтверждении гарантийного случая стоимость доставки компенсируется. Гарантия не распространяется на повреждения, вызванные попаданием жидкости, механическими повреждениями или использованием несовместимого блока питания. Дата вступления политики в силу: 1 января 2026 года. Дата последнего обновления: 15 марта 2026 года.",
+          "document_id": "633489c470fe50f17e12d8c857a3d2ec1391eca64a5e954cef8bf25c1188d2e5",
+          "position": 1,
+          "chunk_token_count": 202,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/warranty_policy.txt",
+          "section": null,
+          "text_hash": "45c02720d9286846052d1dad7c6e34f95217efaf28aa959e6405b8dcf682d436",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      },
+      {
+        "id": "ee7b4128-7d89-53e5-a345-8914d2ee8220",
+        "version": 0,
+        "score": 0.7663148116730205,
+        "payload": {
+          "chunk_id": "db9e785ec9b0cc63f2056c5d8a6a9c83e26471fb05620e60308e0780e6e5537f",
+          "text": "Еженедельные резервные копии хранятся 6 месяцев. Ежегодная архивная копия хранится 5 лет. Не менее одной копии критических данных должна находиться на физически изолированном носителе. Проверка восстановления из резервной копии выполняется не реже одного раза в квартал. 5. Хранение данных Рабочие документы должны храниться в корпоративном хранилище. Использование личных облачных хранилищ для корпоративных данных запрещено. Данные с ограниченным доступом должны храниться в зашифрованном виде.",
+          "document_id": "d07978809d9a8c18044a7cbd198b498fadf53a5a111a12a530240b41d7fc6290",
+          "position": 4,
+          "chunk_token_count": 212,
+          "chunk_size": 220,
+          "chunk_overlap": 50,
+          "chunking_strategy": "sentence",
+          "source": "data/raw/security_policy.txt",
+          "section": null,
+          "text_hash": "4e376e4d28d76b27e02ae7c93c3581e83b8477cdf036ca580053c033b511ac3d",
+          "embedding_model": "intfloat/multilingual-e5-base",
+          "embedding_dimensions": 768
+        },
+        "vector": null,
+        "shard_key": null,
+        "order_value": null
+      }
+    ]
+  }
+]

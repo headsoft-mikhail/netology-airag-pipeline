@@ -2,7 +2,7 @@ import argparse
 import typing
 from pathlib import Path
 
-from rag.config import load_config
+from rag.config import load_pipeline_config
 from rag.pipelines.chunk.pipeline import RAGChunkPipeline
 from rag.pipelines.embeddings.pipeline import RAGEmbeddingsPipeline
 from rag.pipelines.prepare.pipeline import RAGPreparePipeline
@@ -26,7 +26,7 @@ def main() -> None:
     prepare_parser.add_argument(
         "--config",
         type=Path,
-        default=Path("config/default.yaml"),
+        default=Path("config/pipeline.yaml"),
         help="Path to pipeline configuration",
     )
 
@@ -37,7 +37,7 @@ def main() -> None:
     chunk_parser.add_argument(
         "--config",
         type=Path,
-        default=Path("config/default.yaml"),
+        default=Path("config/pipeline.yaml"),
         help="Path to pipeline configuration",
     )
 
@@ -48,7 +48,7 @@ def main() -> None:
     embedding_parser.add_argument(
         "--config",
         type=Path,
-        default=Path("config/default.yaml"),
+        default=Path("config/pipeline.yaml"),
         help="Path to pipeline configuration",
     )
 
@@ -59,12 +59,12 @@ def main() -> None:
     vector_store_parser.add_argument(
         "--config",
         type=Path,
-        default=Path("config/default.yaml"),
+        default=Path("config/pipeline.yaml"),
         help="Path to pipeline configuration",
     )
 
     args: typing.Final = parser.parse_args()
-    config: typing.Final = load_config(args.config)
+    config: typing.Final = load_pipeline_config(args.config)
 
     if args.command == "prepare":
         pipeline = RAGPreparePipeline(config)

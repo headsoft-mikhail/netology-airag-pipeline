@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "pydantic",
+    "python-dotenv",
     "beautifulsoup4",
     "datasketch",
     "pyyaml",
@@ -26,7 +27,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/rag"]
+packages = ["src/rag", "src/evaluation"]
 
 [tool.ty.src]
 exclude = []

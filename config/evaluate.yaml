@@ -1,0 +1,21 @@
+retrieval:
+  embedding_model: "intfloat/multilingual-e5-base"
+  vector_store_path: data/vector_store
+  collection_name: rag_chunks
+  search_top_k: 3
+
+llm:
+  url: https://api.groq.com/openai/v1/chat/completions
+  model: "openai/gpt-oss-20b"
+
+test:
+  report_path: data/evaluation
+  questions:
+    - Какой гарантийный срок на оборудование?
+    - Какое время понадобится на диагностику?
+    - Сколько стоит доставка в сервисный центр?
+    - Когда вступила в силу политика IS-2026/04?
+    - Как часто должны создаваться резервные копии?
+    - Как часто нужно менять пароль?
+    - Сколько хранятся резервные копии?
+    - Сколько стоит страхование жизни?
