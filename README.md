@@ -1,20 +1,32 @@
 # Description
-## RAG Data Preparation Pipeline
-
+## RAG Pipeline
 Пайплайн подготовки документов для последующего использования в системах Retrieval-Augmented Generation (RAG).
 
-Проект выполняет загрузку, parsing, очистку, нормализацию, дедупликацию, структурирование и экспорт документов в единый формат. Embeddings и vector database в рамках проекта не реализуются.
+Проект выполняет загрузку, parsing, очистку, нормализацию, дедупликацию, структурирование, разбиение документов на chunks, расчёт embeddings и загрузку данных в vector store.
+
+После подготовки vector store отдельный evaluation-модуль выполняет retrieval по пользовательскому запросу, формирует контекст, передаёт его в LLM и сохраняет результаты тестовых запросов.
+
+## Содержание
+- [Возможности](#Возможности)
+- [Структура проекта](#Структура проекта)
+- [Этапы prepare-pipeline](#Этапы prepare-pipeline)
+- [Этапы chunk-pipeline](#Этапы chunk-pipeline)
+- [Этапы embeddings-pipeline](#Этапы embeddings-pipeline)
+- [Этапы vector-store-pipeline](#Этапы vector-store-pipeline)
+- [Этапы evaluation](#Этапы evaluation)
+- [Этапы evaluation](#Этапы evaluation)
+- [Конфигурация](#Конфигурация)
+- [Исходные данные](#Исходные данные)
+- [Установка и запуск](#Установка и запуск)
 
 ## Возможности
 
 Pipeline поддерживает обработку документов следующих форматов:
-
 * TXT
 * JSON
 * HTML
 
 Реализованы:
-
 * автоматическое обнаружение исходных файлов;
 * parsing разных форматов;
 * очистка текста;
@@ -42,16 +54,23 @@ Pipeline поддерживает обработку документов сле
 * batch-загрузка vectors и metadata;
 * validation загруженных данных;
 * тестовый similarity search;
-* manifest для vector-store-pipeline.
+* manifest для vector-store-pipeline;
+* retrieval пользовательского запроса;
+* формирование контекста из найденных chunks;
+* запрос к LLM;
+* интерактивный режим получения ответа;
+* автоматический прогон тестовых вопросов и формирование evaluation report
+* логгирование сохранение найденных chunks;
 
-## Структура проекта
+## Структура проекта
 
 ```
 project/
 ├── Justfile
 ├── README.md
 ├── config
-│   └── default.yaml
+│   ├── evaluate.yaml
+│   └── pipeline.yaml
 ├── data
 │   ├── chunks
 │   │   ├── chunks.json
@@ -61,6 +80,8 @@ project/
 │   │   ├── embeddings.json
 │   │   ├── embeddings.jsonl
 │   │   └── manifest.json
+│   ├── evaluation
+│   │   └── evaluation_test.json
 │   ├── prepared
 │   │   ├── dataset.json
 │   │   ├── dataset.jsonl
@@ -71,13 +92,15 @@ project/
 │   │   ├── faq.json
 │   │   ├── memory_installation.txt
 │   │   ├── network_setup.txt
+│   │   ├── security_policy.txt
 │   │   ├── software_update.json
 │   │   ├── ssd_guide.txt
 │   │   ├── support_article.html
 │   │   ├── support_article_duplicate.html
 │   │   ├── support_article_near_duplicate.html
 │   │   ├── system_requirements.html
-│   │   └── troubleshooting.json
+│   │   ├── troubleshooting.json
+│   │   └── warranty_policy.txt
 │   └── vector_store
 │       ├── collection
 │       │   └── rag_chunks
@@ -88,6 +111,14 @@ project/
 ├── pyproject.toml
 ├── src
 │   ├── __init__.py
+│   ├── evaluation
+│   │   ├── __init__.py
+│   │   ├── __main__.py
+│   │   ├── cli.py
+│   │   ├── config.py
+│   │   ├── evaluator.py
+│   │   ├── llm_client.py
+│   │   └── retrieval_client.py
 │   └── rag
 │       ├── __init__.py
 │       ├── __main__.py
@@ -139,7 +170,7 @@ project/
 └── uv.lock
 ```
 
-## Этапы prepare-pipeline
+## Этапы prepare-pipeline
 
 Pipeline состоит из последовательных этапов.
 ```
@@ -277,7 +308,7 @@ Pipeline создаёт два формата:
 - manifest.json
 с информацией о результате запуска.
 
-## Этапы chunk-pipeline
+## Этапы chunk-pipeline
 ```
 Prepared documents
        │
@@ -344,7 +375,7 @@ Prepared documents
 
 На этапе Manifest формируется `manifest.json` с информацией о запуске, конфигурации, количестве chunks и результатах validation, с учетом manifest prepare-пайплайна.
 
-## Этапы embeddings-pipeline
+## Этапы embeddings-pipeline
 ```
      Chunks
        │
@@ -417,7 +448,7 @@ Pipeline создаёт файлы:
 После выполнения pipeline формируется manifest.json. Manifest содержит информацию о предыдущем этапе pipeline и результаты текущего запуска
 
 
-## Этапы vector-store-pipeline
+## Этапы vector-store-pipeline
 ```
    Embeddings
        │
@@ -529,32 +560,103 @@ Manifest содержит информацию о предыдущих этап�
 
 ---
 
+## Этапы evaluation
+
+Evaluation не является частью основного data preparation pipeline.
+Он запускается после построения vector store и использует уже подготовленную базу знаний.
+Назначение evaluation-модуля — проверить полный RAG-процесс:
+```
+    User query
+        │
+        ▼
+  Query embedding
+        │
+        ▼
+    Retrieval
+        │
+        ▼
+   Top-k chunks
+        │
+        ▼
+  Context builder
+        │
+        ▼
+      Prompt
+        │
+        ▼
+       LLM
+        │
+        ▼
+      Answer
+```
+
+Evaluation реализован отдельно от rag.pipelines, поскольку он не изменяет и не подготавливает данные. Он использует результат работы pipeline как входной ресурс.
+
+---
+
+### Retrieval
+
+RetrievalClient принимает пользовательский текстовый запрос.
+
+Сначала запрос преобразуется в embedding с использованием той же embedding-модели, которая использовалась при индексации chunks.
+
+После этого выполняется similarity search в vector_store.
+
+
+---
+
+### Context Builder
+
+Найденные chunks объединяются в единый контекст для LLM.
+
+Каждый fragment отделяется от остальных и содержит информацию об источнике
+
+---
+
+### LLM
+
+Для генерации ответа используется LLM через Groq API.
+
+Prompt содержит:
+
+* системную инструкцию;
+* найденный контекст;
+* вопрос пользователя.
+
+Модель должна отвечать только на основании переданного контекста.
+
+Если в контексте отсутствует необходимая информация, модель должна сообщить, что информации недостаточно, вместо генерации неподтверждённого ответа.
+
+API key не хранится в YAML-конфигурации или исходном коде. Он передаётся через переменную окружения `GROQ_API_KEY` в файле `.env`.
+
+---
+
 ## Конфигурация
 
-Все параметры pipeline находятся в `config/default.yaml`. 
+Все параметры pipeline находятся в `config/pipeline.yaml`,  
 В конфигурации задаются пути к исходным и подготовленным данным, параметры дедупликации, настройки экспорта, чанкинга, эмбеддинга, vector-store.
+  
+Параметры evaluation находятся - в `config/evaluate.yaml`.
 
-Параметры не хранятся непосредственно в коде, что позволяет изменять поведение pipeline без изменения исходных файлов.
+Параметры не хранятся непосредственно в коде, что позволяет изменять поведение pipeline и evaluation без изменения исходных файлов.
 
-## Исходные данные
+## Исходные данные
 
-Для тестового набора используется 12 исходных документов.
+Для тестового набора используется 14 исходных документов.
 
 В набор специально включены:
 * документы разных форматов;
 * exact duplicate;
 * near-duplicate.
 
-Из 12 исходных документов после дедупликации в итоговый датасет попадает 10 документов.
-
-Pipeline не требует ручного изменения исходных документов перед повторным запуском.
+Из 14 исходных документов после дедупликации в итоговый датасет попадает 12 документов.
 Повторный запуск перезаписывает подготовленный датасет и manifest.
 
 Идентификаторы документов формируются детерминированно, поэтому при одинаковых входных данных структура и результаты обработки остаются одинаковыми.
 
 
-# Установка и запуск
-# Project dev environment (uv + just)
+# Установка и запуск
+## Project dev environment (uv + just)
 
 Local development stack for ML workflows with:
 - Управление версией python и окружением: `uv` + `pyenv`
@@ -566,9 +668,9 @@ just setup && just python 3.13 && just lock && just install
 
 
 ## Запуск
-Pipeline запускается из корня проекта:
+**Pipeline** запускается из корня проекта:
 ```bash
-just rag_prepare && just rag_chunk && just reg_embegging && just rag_vectorstore
+just rag_prepare && just rag_chunk && just rag_embegging && just rag_vectorstore
 ```
 или
 ```bash
@@ -581,3 +683,18 @@ data/chunks/
 data/embeddings/
 data/vector_store/
 ```
+
+Запуск **Evaluation**:
+Интерактивный режим для проверки произвольного пользовательского запроса
+```bash
+just evaluate "вопрос_в_кавычках"
+```
+
+Автоматический прогон заранее подготовленного набора тестовых вопросов
+```bash
+just evaluate_test
+```
+Для каждого тестового вопроса в evaluation report фиксируются:
+* вопрос;
+* top-k найденных chunks с metadata;
+* ответ LLM.

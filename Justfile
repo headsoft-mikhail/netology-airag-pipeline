@@ -45,3 +45,9 @@ pipeline:
     uv run python -m rag chunk
     uv run python -m rag embedding
     uv run python -m rag vector_store
+
+evaluate question:
+    uv run python -m evaluation run -q "{{question}}"
+
+evaluate_test:
+    uv run python -m evaluation test

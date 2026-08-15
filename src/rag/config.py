@@ -87,7 +87,7 @@ class PipelineConfig(pydantic.BaseModel):
     vector_store: VectorStoreConfig
 
 
-def load_config(path: Path) -> PipelineConfig:
+def load_pipeline_config(path: Path) -> PipelineConfig:
     with path.open("r", encoding="utf-8") as file:
         data: typing.Final = yaml.safe_load(file)
 

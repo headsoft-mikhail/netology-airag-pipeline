@@ -18,11 +18,11 @@ class VectorSearchResult:
 
 
 @dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
-class QdrantSearcher:
+class VectorStoreSearcher:
     config: VectorStoreConfig
     client: qdrant_client.QdrantClient
 
-    def search(self, embedded_chunks: list[models.EmbeddedChunk]) -> list[VectorSearchResult]:
+    def search_batch(self, embedded_chunks: list[models.EmbeddedChunk]) -> list[VectorSearchResult]:
         results: typing.Final[list[VectorSearchResult]] = []
         test_chunks: typing.Final = embedded_chunks[: self.config.search_test_queries]
 
