@@ -14,7 +14,6 @@
 - [Этапы embeddings-pipeline](#Этапы-embeddings-pipeline)
 - [Этапы vector-store-pipeline](#Этапы-vector-store-pipeline)
 - [Этапы evaluation](#Этапы-evaluation)
-- [Этапы evaluation](#Этапы-evaluation)
 - [Конфигурация](#Конфигурация)
 - [Исходные данные](#Исходные-данные)
 - [Установка и запуск](#Установка-и-запуск)
@@ -62,7 +61,7 @@ Pipeline поддерживает обработку документов сле
 * автоматический прогон тестовых вопросов и формирование evaluation report
 * логгирование сохранение найденных chunks;
 
-## Структура проекта
+## Структура проекта
 
 ```
 project/
@@ -170,7 +169,7 @@ project/
 └── uv.lock
 ```
 
-## Этапы prepare-pipeline
+## Этапы prepare-pipeline
 
 Pipeline состоит из последовательных этапов.
 ```
@@ -308,7 +307,7 @@ Pipeline создаёт два формата:
 - manifest.json
 с информацией о результате запуска.
 
-## Этапы chunk-pipeline
+## Этапы chunk-pipeline
 ```
 Prepared documents
        │
@@ -375,7 +374,7 @@ Prepared documents
 
 На этапе Manifest формируется `manifest.json` с информацией о запуске, конфигурации, количестве chunks и результатах validation, с учетом manifest prepare-пайплайна.
 
-## Этапы embeddings-pipeline
+## Этапы embeddings-pipeline
 ```
      Chunks
        │
@@ -448,7 +447,7 @@ Pipeline создаёт файлы:
 После выполнения pipeline формируется manifest.json. Manifest содержит информацию о предыдущем этапе pipeline и результаты текущего запуска
 
 
-## Этапы vector-store-pipeline
+## Этапы vector-store-pipeline
 ```
    Embeddings
        │
@@ -560,7 +559,7 @@ Manifest содержит информацию о предыдущих этап�
 
 ---
 
-## Этапы evaluation
+## Этапы evaluation
 
 Evaluation не является частью основного data preparation pipeline.
 Он запускается после построения vector store и использует уже подготовленную базу знаний.
@@ -640,7 +639,7 @@ API key не хранится в YAML-конфигурации или исход
 
 Параметры не хранятся непосредственно в коде, что позволяет изменять поведение pipeline и evaluation без изменения исходных файлов.
 
-## Исходные данные
+## Исходные данные
 
 Для тестового набора используется 14 исходных документов.
 
@@ -655,7 +654,7 @@ API key не хранится в YAML-конфигурации или исход
 Идентификаторы документов формируются детерминированно, поэтому при одинаковых входных данных структура и результаты обработки остаются одинаковыми.
 
 
-# Установка и запуск
+# Установка и запуск
 ## Project dev environment (uv + just)
 
 Local development stack for ML workflows with:
