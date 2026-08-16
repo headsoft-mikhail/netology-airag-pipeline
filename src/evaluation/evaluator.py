@@ -1,5 +1,6 @@
 import json
 import logging
+import time
 import typing
 
 from evaluation.config import EvaluatorConfig
@@ -34,6 +35,7 @@ class Evaluator:
         test_results: typing.Final = []
         for one_test_query in self.config.test.questions:
             retrieval_results = self.retrieval_client.top_k(one_test_query)
+            time.sleep(1)
             answer = self.evaluate(one_test_query)
             test_results.append(
                 {
