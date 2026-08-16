@@ -5,10 +5,11 @@ import requests
 
 from evaluation.config import LLMConfig
 
+NOT_FOUND_REPLY: typing.Final = "Ответ не найден"
 SYSTEM_PROMPT: typing.Final = (
     "Ты отвечаешь на вопросы только на основе предоставленного контекста. "
     "Не выдумывай информацию. "
-    "Если в контексте нет ответа, скажи, что информации недостаточно."
+    f"Если в контексте нет ответа, ответь '{NOT_FOUND_REPLY}'"
 )
 USER_PROMPT_TEMPLATE: typing.Final = (
     "Контекст: {context} Вопрос пользователя: {query} Ответь на вопрос только на основе контекста."

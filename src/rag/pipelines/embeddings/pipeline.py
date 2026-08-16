@@ -19,12 +19,9 @@ class RAGEmbeddingsPipeline:
         self.config: PipelineConfig = config
 
         transformer: typing.Final = SentenceTransformer(self.config.embedding.model)
-        embedding_model: typing.Final = EmbeddingModel(model_name=self.config.embedding.model, transformer=transformer)
+        embedding_model: typing.Final = EmbeddingModel(config=self.config.embedding, transformer=transformer)
         self.embedding_stage = EmbeddingStage(model=embedding_model)
-        self.validator = EmbeddingValidator(
-            model_name=embedding_model.model_name,
-            dimensions=embedding_model.dimensions,
-        )
+        self.validator = EmbeddingValidator(model=embedding_model)
         self.manifest_manager = ManifestManager(config=self.config)
         self.exporter = EmbeddingExporter(output_dir=self.config.paths.embeddings)
 

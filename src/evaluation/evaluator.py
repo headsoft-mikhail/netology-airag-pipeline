@@ -1,8 +1,10 @@
 import json
 import logging
+import time
 import typing
 
 from evaluation.config import EvaluatorConfig
+from evaluation.context_builder import ContextBuilder
 from evaluation.llm_client import LLMClient
 from evaluation.retrieval_client import RetrievalClient
 
@@ -17,12 +19,14 @@ class Evaluator:
         self.config = config
 
         self.retrieval_client = RetrievalClient(config=self.config.retrieval)
+        self.context_builder = ContextBuilder(config=self.config.context)
         self.llm_client = LLMClient(config=self.config.llm)
 
     def evaluate(self, query: str) -> str:
         retrieval_results: typing.Final = self.retrieval_client.top_k(query)
         LOGGER_OBJ.info("Retrieval - DONE!\n-------------")
-        answer: typing.Final = self.llm_client.request(query=query, context=self._build_context(retrieval_results))
+        context: typing.Final = self.context_builder.build_context(retrieval_results)
+        answer: typing.Final = self.llm_client.request(query=query, context=context)
         LOGGER_OBJ.info(f"LLM request - DONE! Answer:\n {answer}\n-------------")
         return answer
 
@@ -31,6 +35,7 @@ class Evaluator:
         test_results: typing.Final = []
         for one_test_query in self.config.test.questions:
             retrieval_results = self.retrieval_client.top_k(one_test_query)
+            time.sleep(1)
             answer = self.evaluate(one_test_query)
             test_results.append(
                 {

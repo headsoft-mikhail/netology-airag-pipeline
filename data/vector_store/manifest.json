@@ -1,29 +1,29 @@
 {
   "prepare": {
-    "run_id": "bb805cee-8e3c-471a-a2c0-4220e2c33ec3",
-    "started_at": "2026-08-15T13:49:46.935984+00:00",
-    "created_at": "2026-08-15T13:49:47.057325+00:00",
+    "run_id": "3c2b4f61-6ec1-47aa-b7cb-463a03d8c3f5",
+    "started_at": "2026-08-16T10:32:21.802674+00:00",
+    "created_at": "2026-08-16T10:32:21.951678+00:00",
     "count": {
-      "input_documents": 14,
-      "output_documents": 12
+      "input_documents": 15,
+      "output_documents": 13
     },
     "deduplication": {
       "exact_duplicates": 1,
-      "near_duplicates": 1
+      "near_duplicates": 2
     },
     "stage_config": {
       "deduplication_similarity_threshold": 0.65,
       "normalization_unicode_form": "NFC"
     }
   },
-  "run_id": "e76e51bd-2b63-45d7-b681-3c243453ad91",
+  "run_id": "5318a453-6087-4d46-80e3-19abe93fc347",
   "chunk": {
-    "run_id": "b8b02e23-25fa-4361-bfff-76311ba55cb9",
-    "started_at": "2026-08-15T13:49:50.943907+00:00",
-    "created_at": "2026-08-15T13:49:51.031806+00:00",
+    "run_id": "cba6d499-711f-404a-b9bf-6b3659f1d464",
+    "started_at": "2026-08-16T10:32:26.056057+00:00",
+    "created_at": "2026-08-16T10:32:26.149363+00:00",
     "count": {
-      "input_documents": 12,
-      "output_chunks": 62
+      "input_documents": 13,
+      "output_chunks": 70
     },
     "stage_config": {
       "strategy": "sentence",
@@ -31,9 +31,9 @@
       "chunk_overlap": 50
     },
     "validation": {
-      "total_chunks": 62,
+      "total_chunks": 70,
       "empty_chunks_count": 0,
-      "oversized_chunks_count": 2,
+      "oversized_chunks_count": 3,
       "undersized_chunks_count": 0,
       "invalid_metadata_count": 0,
       "invalid_ids_count": 0,
@@ -42,20 +42,20 @@
     }
   },
   "embedding": {
-    "run_id": "0e5dd21c-5834-4a01-8f88-8db1f1fa067f",
-    "started_at": "2026-08-15T13:50:00.521064+00:00",
-    "created_at": "2026-08-15T13:50:01.854002+00:00",
+    "run_id": "0c6c0dd2-f20e-4a8d-9636-d2db0f2884ff",
+    "started_at": "2026-08-16T10:32:37.021894+00:00",
+    "created_at": "2026-08-16T10:32:38.794378+00:00",
     "count": {
-      "input_chunks": 62,
-      "output_embeddings": 62
+      "input_chunks": 70,
+      "output_embeddings": 70
     },
     "stage_config": {
       "model": "intfloat/multilingual-e5-base",
       "dimensions": 768
     },
     "validation": {
-      "total_chunks": 62,
-      "total_embeddings": 62,
+      "total_chunks": 70,
+      "total_embeddings": 70,
       "empty_embeddings_count": 0,
       "invalid_values_count": 0,
       "invalid_dimensions_count": 0,
@@ -66,12 +66,12 @@
     }
   },
   "vector_store": {
-    "run_id": "64a62a38-527a-431c-a279-113b84ce6ea8",
-    "started_at": "2026-08-15T13:50:05.932749+00:00",
-    "created_at": "2026-08-15T13:50:06.004877+00:00",
+    "run_id": "0d6bc954-6963-4218-bdbe-cea9388c476f",
+    "started_at": "2026-08-16T10:32:43.189849+00:00",
+    "created_at": "2026-08-16T10:32:43.270587+00:00",
     "count": {
-      "input_embeddings": 62,
-      "stored_points": 62
+      "input_embeddings": 70,
+      "stored_points": 70
     },
     "stage_config": {
       "store_type": "qdrant",
@@ -80,8 +80,8 @@
       "distance": "cosine"
     },
     "validation": {
-      "input_embeddings_count": 62,
-      "stored_points_count": 62,
+      "input_embeddings_count": 70,
+      "stored_points_count": 70,
       "invalid_dimensions_count": 0,
       "empty_vectors_count": 0,
       "invalid_vectors_count": 0,

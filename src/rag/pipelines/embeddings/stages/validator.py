@@ -5,6 +5,7 @@ import math
 import typing
 
 from rag import models
+from rag.pipelines.embeddings.stages.embedding import EmbeddingModel
 
 LOGGER_OBJ: typing.Final = logging.getLogger(__name__)
 
@@ -38,8 +39,7 @@ class EmbeddingValidationMetrics:
 
 @dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
 class EmbeddingValidator:
-    model_name: str
-    dimensions: int
+    model: EmbeddingModel
 
     def validate(
         self,
@@ -88,7 +88,7 @@ class EmbeddingValidator:
             if not self._validate_values(one_embedded_chunk.embedding):
                 invalid_values_count += 1
 
-            if len(one_embedded_chunk.embedding) != self.dimensions:
+            if len(one_embedded_chunk.embedding) != self.model.dimensions:
                 invalid_dimensions_count += 1
 
             if not self._validate_metadata(one_embedded_chunk):
@@ -132,8 +132,8 @@ class EmbeddingValidator:
         return (
             bool(metadata.document_id)
             and metadata.position >= 0
-            and metadata.embedding_model == self.model_name
-            and metadata.embedding_dimensions == self.dimensions
+            and metadata.embedding_model == self.model.config.model
+            and metadata.embedding_dimensions == self.model.dimensions
         )
 
     def _validate_text_hash(

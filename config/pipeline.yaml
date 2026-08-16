@@ -21,6 +21,7 @@ deduplication:
   exact: true
   near_duplicate: true
   similarity_threshold: 0.65
+  permutations_number: 128
 
 chunking:
   strategy: sentence

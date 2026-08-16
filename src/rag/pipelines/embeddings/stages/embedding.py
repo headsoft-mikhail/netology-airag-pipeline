@@ -4,11 +4,12 @@ import typing
 from sentence_transformers import SentenceTransformer
 
 from rag import models
+from rag.config import EmbeddingConfig
 
 
 @dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
 class EmbeddingModel:
-    model_name: str
+    config: EmbeddingConfig
     transformer: SentenceTransformer
 
     def encode(self, texts: list[str]) -> list[list[float]]:
@@ -23,7 +24,7 @@ class EmbeddingModel:
     def dimensions(self) -> int:
         dimensions: typing.Final = self.transformer.get_embedding_dimension()
         if dimensions is None:
-            raise ValueError(f"Cannot determine embedding dimensions for model {self.model_name!r}")
+            raise ValueError(f"Cannot determine embedding dimensions for model {self.config.model!r}")
         return dimensions
 
 
@@ -42,7 +43,7 @@ class EmbeddingStage:
                 embedding=embedding,
                 metadata=models.EmbeddedChunkMetadata(
                     **chunk.metadata.model_dump(),
-                    embedding_model=self.model.model_name,
+                    embedding_model=self.model.config.model,
                     embedding_dimensions=self.model.dimensions,
                 ),
             )
