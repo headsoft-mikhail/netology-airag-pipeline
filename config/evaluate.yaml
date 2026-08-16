@@ -3,6 +3,11 @@ retrieval:
   vector_store_path: data/vector_store
   collection_name: rag_chunks
   search_top_k: 3
+  excluded_documents:
+    - data/raw/warranty_policy.txt
+
+context:
+  min_score: 0.75
 
 llm:
   url: https://api.groq.com/openai/v1/chat/completions
@@ -14,8 +19,9 @@ test:
     - Какой гарантийный срок на оборудование?
     - Какое время понадобится на диагностику?
     - Сколько стоит доставка в сервисный центр?
-    - Когда вступила в силу политика IS-2026/04?
     - Как часто должны создаваться резервные копии?
     - Как часто нужно менять пароль?
     - Сколько хранятся резервные копии?
     - Сколько стоит страхование жизни?
+    - Какие системные требования Desktop Support Tools?
+    - Как проверить версию Desktop Support Tools?

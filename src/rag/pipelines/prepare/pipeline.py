@@ -19,10 +19,8 @@ class RAGPreparePipeline:
     def __init__(self, config: PipelineConfig):
         self.config = config
 
-        self.normalizer = TextNormalizer(unicode_form=config.normalization.unicode_form)
-        self.deduplicator = Deduplicator(
-            near_duplicate_threshold=(config.deduplication.similarity_threshold),
-        )
+        self.normalizer = TextNormalizer(config=config.normalization)
+        self.deduplicator = Deduplicator(config=self.config.deduplication)
         self.structurer = DocumentStructurer()
         self.exporter = DatasetExporter(output_dir=config.paths.prepared)
         self.manifest_manager = ManifestManager(config=self.config)

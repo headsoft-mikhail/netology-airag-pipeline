@@ -41,11 +41,12 @@ class NormalizationConfig(pydantic.BaseModel):
 class DeduplicationConfig(pydantic.BaseModel):
     exact: bool = True
     near_duplicate: bool = True
-    similarity_threshold: float = 0.85
+    similarity_threshold: float
+    permutations_number: int
 
 
 class ChunkingConfig(pydantic.BaseModel):
-    strategy: typing.Literal["sentence", "paragraph", "token", "text"]
+    strategy: typing.Literal["sentence", "paragraph", "token"]
     chunk_size: int = pydantic.Field(gt=0)
     chunk_overlap: int = pydantic.Field(ge=0)
     tokenizer_model: str

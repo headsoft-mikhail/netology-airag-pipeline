@@ -38,7 +38,7 @@ class ChunkSplitter:
                     document=document,
                     section=section_name,
                 )
-            elif self.config.strategy in {"token", "text"}:
+            elif self.config.strategy in {"token"}:
                 section_chunks = self._split_by_tokens(
                     text=text,
                     document=document,
@@ -47,7 +47,7 @@ class ChunkSplitter:
             else:
                 raise ValueError(
                     f"Unsupported chunking strategy: {self.config.strategy!r}. "
-                    "Supported strategies: sentence, paragraph, token, text."
+                    "Supported strategies: sentence, paragraph, token."
                 )
 
             chunks.extend(section_chunks)

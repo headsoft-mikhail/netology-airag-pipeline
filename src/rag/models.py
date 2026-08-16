@@ -22,6 +22,13 @@ class DeduplicationResult(pydantic.BaseModel):
     exact_duplicates: int = 0
     near_duplicates: int = 0
 
+    def __add__(self, other: "DeduplicationResult") -> "DeduplicationResult":
+        return DeduplicationResult(
+            documents=other.documents,
+            exact_duplicates=self.exact_duplicates + other.exact_duplicates,
+            near_duplicates=self.near_duplicates + other.near_duplicates,
+        )
+
 
 class PreparedDocumentMetadata(pydantic.BaseModel):
     source: str

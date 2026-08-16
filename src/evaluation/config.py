@@ -16,11 +16,16 @@ class LLMConfig(pydantic.BaseModel):
         return os.environ["GROQ_API_KEY"]
 
 
+class ContextBuilderConfig(pydantic.BaseModel):
+    min_score: float
+
+
 class RetrievalConfig(pydantic.BaseModel):
     embedding_model: str
     vector_store_path: str
     collection_name: str
     search_top_k: int
+    excluded_documents: list[str]
 
 
 class TestEvaluationConfig(pydantic.BaseModel):
@@ -30,6 +35,7 @@ class TestEvaluationConfig(pydantic.BaseModel):
 
 class EvaluatorConfig(pydantic.BaseModel):
     llm: LLMConfig
+    context: ContextBuilderConfig
     retrieval: RetrievalConfig
     test: TestEvaluationConfig
 

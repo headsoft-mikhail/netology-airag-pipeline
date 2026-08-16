@@ -7,45 +7,85 @@ import typing
 from datasketch import MinHash
 
 from rag import models
+from rag.config import DeduplicationConfig
 
 LOGGER_OBJ: typing.Final = logging.getLogger(__name__)
 
 
 @dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
 class Deduplicator:
-    near_duplicate_threshold: float = 0.85
-    num_perm: int = 128
+    config: DeduplicationConfig
 
     def deduplicate(
         self,
         documents: list[models.ParsedDocument],
     ) -> models.DeduplicationResult:
+        unique_documents: typing.Final[list[models.ParsedDocument]] = documents.copy()
+
+        result = models.DeduplicationResult(
+            documents=unique_documents,
+            exact_duplicates=0,
+            near_duplicates=0,
+        )
+
+        if self.config.exact:
+            result += self._deduplicate_exact(unique_documents)
+
+        if self.config.near_duplicate:
+            result += self._deduplicate_near(unique_documents)
+
+        return result
+
+    def _deduplicate_exact(
+        self,
+        documents: list[models.ParsedDocument],
+    ) -> models.DeduplicationResult:
         unique_documents: typing.Final[list[models.ParsedDocument]] = []
         exact_hashes: typing.Final[set[str]] = set()
+        duplicates_count = 0
 
-        exact_duplicates = 0
-        near_duplicates = 0
-
-        for one_document in documents:
-            text_hash = self._text_hash(one_document.text)
+        for document in documents:
+            text_hash = self._text_hash(document.text)
 
             if text_hash in exact_hashes:
-                LOGGER_OBJ.info(f"Document {one_document.source} has exact duplicate")
-                exact_duplicates += 1
-                continue
-
-            if self._is_near_duplicate(one_document, unique_documents):
-                LOGGER_OBJ.info(f"Document {one_document.source} has near duplicate")
-                near_duplicates += 1
+                LOGGER_OBJ.info(
+                    "Document %s has exact duplicate",
+                    document.source,
+                )
+                duplicates_count += 1
                 continue
 
             exact_hashes.add(text_hash)
-            unique_documents.append(one_document)
+            unique_documents.append(document)
 
         return models.DeduplicationResult(
             documents=unique_documents,
-            exact_duplicates=exact_duplicates,
-            near_duplicates=near_duplicates,
+            exact_duplicates=duplicates_count,
+            near_duplicates=0,
+        )
+
+    def _deduplicate_near(
+        self,
+        documents: list[models.ParsedDocument],
+    ) -> models.DeduplicationResult:
+        unique_documents: typing.Final[list[models.ParsedDocument]] = []
+        duplicates_count = 0
+
+        for document in documents:
+            if self._is_near_duplicate(document, unique_documents):
+                LOGGER_OBJ.info(
+                    "Document %s has near duplicate",
+                    document.source,
+                )
+                duplicates_count += 1
+                continue
+
+            unique_documents.append(document)
+
+        return models.DeduplicationResult(
+            documents=unique_documents,
+            exact_duplicates=0,
+            near_duplicates=duplicates_count,
         )
 
     @staticmethod
@@ -59,21 +99,20 @@ class Deduplicator:
     ) -> bool:
         current: typing.Final = self._create_minhash(document.text)
 
-        for one_existing_document in existing_documents:
-            candidate = self._create_minhash(one_existing_document.text)
+        for existing_document in existing_documents:
+            candidate = self._create_minhash(existing_document.text)
             similarity = current.jaccard(candidate)
 
-            if similarity >= self.near_duplicate_threshold:
+            if similarity >= self.config.similarity_threshold:
                 return True
 
         return False
 
     def _create_minhash(self, text: str) -> MinHash:
-        minhash: typing.Final = MinHash(num_perm=self.num_perm)
+        minhash: typing.Final = MinHash(num_perm=self.config.permutations_number)
         words: typing.Final = self._tokenize(text)
-
-        for one_word in words:
-            minhash.update(one_word.encode("utf-8"))
+        for word in words:
+            minhash.update(word.encode("utf-8"))
 
         return minhash
 
