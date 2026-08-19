@@ -1,8 +1,13 @@
 {
   "prepare": {
-    "run_id": "3c2b4f61-6ec1-47aa-b7cb-463a03d8c3f5",
-    "started_at": "2026-08-16T10:32:21.802674+00:00",
-    "created_at": "2026-08-16T10:32:21.951678+00:00",
+    "run_id": "ff4b7d95-6b18-4acc-bcca-55e84f60d5cb",
+    "started_at": "2026-08-19T14:48:27.942507+00:00",
+    "created_at": "2026-08-19T14:48:28.087352+00:00",
+    "paths": {
+      "config": "config/pipeline.yaml",
+      "input_dir": "data/raw",
+      "prepared_path": "data/prepared/dataset.json"
+    },
     "count": {
       "input_documents": 15,
       "output_documents": 13
@@ -16,5 +21,5 @@
       "normalization_unicode_form": "NFC"
     }
   },
-  "run_id": "a3a29ba5-5c30-4f11-8f31-89efae1667d2"
+  "run_id": "916cdd66-3345-49c3-bd58-ae439d521875"
 }

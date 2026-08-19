@@ -1,8 +1,13 @@
 {
   "prepare": {
-    "run_id": "3c2b4f61-6ec1-47aa-b7cb-463a03d8c3f5",
-    "started_at": "2026-08-16T10:32:21.802674+00:00",
-    "created_at": "2026-08-16T10:32:21.951678+00:00",
+    "run_id": "ff4b7d95-6b18-4acc-bcca-55e84f60d5cb",
+    "started_at": "2026-08-19T14:48:27.942507+00:00",
+    "created_at": "2026-08-19T14:48:28.087352+00:00",
+    "paths": {
+      "config": "config/pipeline.yaml",
+      "input_dir": "data/raw",
+      "prepared_path": "data/prepared/dataset.json"
+    },
     "count": {
       "input_documents": 15,
       "output_documents": 13
@@ -16,11 +21,16 @@
       "normalization_unicode_form": "NFC"
     }
   },
-  "run_id": "91d5e859-3114-41df-ae1d-d58c44c463b5",
+  "run_id": "91019095-c7d0-4cd0-a81d-67b679be2b59",
   "chunk": {
-    "run_id": "cba6d499-711f-404a-b9bf-6b3659f1d464",
-    "started_at": "2026-08-16T10:32:26.056057+00:00",
-    "created_at": "2026-08-16T10:32:26.149363+00:00",
+    "run_id": "24bac63c-09f7-48c1-b3a9-252935c7bbb9",
+    "started_at": "2026-08-19T14:48:32.386769+00:00",
+    "created_at": "2026-08-19T14:48:32.478840+00:00",
+    "paths": {
+      "config": "config/pipeline.yaml",
+      "prepared_path": "data/prepared/dataset.json",
+      "chunks_path": "data/chunks/chunks.jsonl"
+    },
     "count": {
       "input_documents": 13,
       "output_chunks": 70
@@ -42,9 +52,14 @@
     }
   },
   "embedding": {
-    "run_id": "0c6c0dd2-f20e-4a8d-9636-d2db0f2884ff",
-    "started_at": "2026-08-16T10:32:37.021894+00:00",
-    "created_at": "2026-08-16T10:32:38.794378+00:00",
+    "run_id": "e45e6e97-685f-4a8e-9a5b-4ae834d781c8",
+    "started_at": "2026-08-19T14:48:42.292198+00:00",
+    "created_at": "2026-08-19T14:48:43.741577+00:00",
+    "paths": {
+      "config": "config/pipeline.yaml",
+      "chunks_path": "data/chunks/chunks.jsonl",
+      "embeddings_path": "data/embeddings/embeddings.jsonl"
+    },
     "count": {
       "input_chunks": 70,
       "output_embeddings": 70

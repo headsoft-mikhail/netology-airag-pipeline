@@ -24,7 +24,7 @@ class RAGVectorStorePipeline:
         self.validator = VectorStoreValidator(config=self.config.vector_store)
         self.searcher: typing.Final = VectorStoreSearcher(config=self.config.vector_store, client=store_client)
         self.manifest_manager = ManifestManager(config=self.config)
-        self.exporter: typing.Final = VectorStoreExporter(output_dir=self.config.paths.vector_store)
+        self.exporter: typing.Final = VectorStoreExporter(config=self.config.paths)
 
     def run(self) -> None:
         LOGGER_OBJ.info("Start vector store pipeline...")
@@ -52,7 +52,7 @@ class RAGVectorStorePipeline:
             self.store.close()
 
         self.exporter.export(search_results)
-        LOGGER_OBJ.info("Export - DONE!\n-------------")
+        LOGGER_OBJ.info("Exporting - DONE!\n-------------")
 
         self.manifest_manager.create_stage_manifest(
             StagesEnum.VECTOR_STORE,

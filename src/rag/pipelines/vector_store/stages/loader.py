@@ -4,7 +4,7 @@ import typing
 from pathlib import Path
 
 from rag import models
-from src.rag.models import EmbeddedChunk
+from rag.models import EmbeddedChunk
 
 LOGGER_OBJ: typing.Final = logging.getLogger(__name__)
 

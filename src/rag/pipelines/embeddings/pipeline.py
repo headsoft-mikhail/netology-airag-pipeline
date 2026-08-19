@@ -23,7 +23,7 @@ class RAGEmbeddingsPipeline:
         self.embedding_stage = EmbeddingStage(model=embedding_model)
         self.validator = EmbeddingValidator(model=embedding_model)
         self.manifest_manager = ManifestManager(config=self.config)
-        self.exporter = EmbeddingExporter(output_dir=self.config.paths.embeddings)
+        self.exporter = EmbeddingExporter(config=self.config.paths)
 
     def run(self) -> None:
         LOGGER_OBJ.info("Start embedding pipeline...")

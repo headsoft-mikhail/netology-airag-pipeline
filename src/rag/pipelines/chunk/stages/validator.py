@@ -23,7 +23,7 @@ class ChunkingValidationMetrics:
     overlap_errors_count: int
 
     @property
-    def valid(self) -> bool:
+    def overall_validity(self) -> bool:
         return not any(
             (
                 self.empty_chunks_count,
@@ -59,15 +59,12 @@ class ChunkValidator:
 
         chunks_by_document: typing.Final[dict[str, list[models.Chunk]]] = {}
 
-        for chunk in chunks:
-            metadata = chunk.metadata
+        for one_chunk in chunks:
+            metadata = one_chunk.metadata
 
-            chunks_by_document.setdefault(
-                metadata.document_id,
-                [],
-            ).append(chunk)
+            chunks_by_document.setdefault(metadata.document_id, []).append(one_chunk)
 
-            if not chunk.text.strip():
+            if not one_chunk.text.strip():
                 empty_chunks_count += 1
 
             if metadata.chunk_token_count > metadata.chunk_size:
@@ -76,10 +73,10 @@ class ChunkValidator:
             if metadata.chunk_token_count < self._minimum_chunk_tokens():
                 undersized_chunks_count += 1
 
-            if not self._validate_metadata(chunk):
+            if not self._validate_metadata(one_chunk):
                 invalid_metadata_count += 1
 
-            if not self._validate_id(chunk):
+            if not self._validate_id(one_chunk):
                 invalid_ids_count += 1
 
             if metadata.document_id not in document_ids:
@@ -107,10 +104,7 @@ class ChunkValidator:
         return metrics
 
     def _minimum_chunk_tokens(self) -> int:
-        return max(
-            1,
-            int(self.config.chunk_size * 0.1),
-        )
+        return max(1, int(self.config.chunk_size * 0.1))
 
     def _validate_metadata(
         self,
@@ -127,12 +121,8 @@ class ChunkValidator:
             and metadata.chunking_strategy == self.config.strategy
         )
 
-    def _validate_id(
-        self,
-        chunk: models.Chunk,
-    ) -> bool:
+    def _validate_id(self, chunk: models.Chunk) -> bool:
         metadata: typing.Final = chunk.metadata
-
         text_hash: typing.Final = hashlib.sha256(chunk.text.encode("utf-8")).hexdigest()
 
         expected_id: typing.Final = hashlib.sha256(
@@ -282,7 +272,7 @@ class ChunkValidator:
                 "invalid_ids=%d, "
                 "lineage_errors=%d, "
                 "overlap_errors=%d, "
-                "valid=%s"
+                "overall_validity=%s"
             ),
             metrics.total_chunks,
             metrics.empty_chunks_count,
@@ -292,5 +282,5 @@ class ChunkValidator:
             metrics.invalid_ids_count,
             metrics.lineage_errors_count,
             metrics.overlap_errors_count,
-            metrics.valid,
+            metrics.overall_validity,
         )

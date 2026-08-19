@@ -17,7 +17,7 @@ class RAGChunkPipeline:
         self.config: PipelineConfig = config
 
         self.splitter = ChunkSplitter(config=self.config.chunking)
-        self.exporter = ChunkExporter(output_dir=self.config.paths.chunks)
+        self.exporter = ChunkExporter(config=self.config.paths)
         self.validator = ChunkValidator(config=self.config.chunking)
         self.manifest_manager = ManifestManager(config=self.config)
 
@@ -32,11 +32,10 @@ class RAGChunkPipeline:
         LOGGER_OBJ.info(f"Splitting - DONE! {len(chunks)} chunks created.\n-------------")
 
         self.exporter.export(chunks)
-
         LOGGER_OBJ.info("Exporting - DONE!\n-------------")
 
         validation_metrics: typing.Final = self.validator.validate(chunks=chunks, documents=documents)
-        if not validation_metrics.valid:
+        if not validation_metrics.overall_validity:
             LOGGER_OBJ.error(f"Chunk validation failed: {validation_metrics}")
         LOGGER_OBJ.info("Validation - DONE!\n-------------")
 

@@ -7,6 +7,7 @@ import yaml
 
 
 class PathsConfig(pydantic.BaseModel):
+    config: Path | None = None
     input: Path
     prepared: Path
     chunks: Path
@@ -15,15 +16,31 @@ class PathsConfig(pydantic.BaseModel):
 
     @property
     def prepared_jsonl(self) -> Path:
+        return Path(self.prepared, "dataset.json")
+
+    @property
+    def prepared_json(self) -> Path:
         return Path(self.prepared, "dataset.jsonl")
+
+    @property
+    def chunks_json(self) -> Path:
+        return Path(self.chunks, "chunks.json")
 
     @property
     def chunks_jsonl(self) -> Path:
         return Path(self.chunks, "chunks.jsonl")
 
     @property
+    def embeddings_json(self) -> Path:
+        return Path(self.embeddings, "embeddings.json")
+
+    @property
     def embeddings_jsonl(self) -> Path:
         return Path(self.embeddings, "embeddings.jsonl")
+
+    @property
+    def search_results_json(self) -> Path:
+        return Path(self.vector_store, "search_results.json")
 
 
 class ParsingConfig(pydantic.BaseModel):
@@ -92,4 +109,7 @@ def load_pipeline_config(path: Path) -> PipelineConfig:
     with path.open("r", encoding="utf-8") as file:
         data: typing.Final = yaml.safe_load(file)
 
-    return PipelineConfig.model_validate(data)
+    pipeline_config: typing.Final = PipelineConfig.model_validate(data)
+    pipeline_config.paths.config = path
+
+    return pipeline_config

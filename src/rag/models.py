@@ -1,4 +1,8 @@
+import math
+
 import pydantic
+
+from rag.config import VectorStoreConfig
 
 
 class SourceDocument(pydantic.BaseModel):
@@ -64,12 +68,25 @@ class Chunk(pydantic.BaseModel):
 
 
 class EmbeddedChunkMetadata(ChunkMetadata):
-    embedding_model: str
+    embedding_model: str = pydantic.Field(min_length=1)
     embedding_dimensions: int
 
 
 class EmbeddedChunk(pydantic.BaseModel):
-    id: str
-    text: str
+    id: str = pydantic.Field(min_length=1)
+    text: str = pydantic.Field(min_length=1)
     embedding: list[float]
     metadata: EmbeddedChunkMetadata
+
+    def is_valid_for_vector_store(self, vector_store_config: VectorStoreConfig):
+        return (
+            self.embedding
+            and self.metadata
+            and self.metadata.embedding_dimensions == vector_store_config.vectors_dimensions
+            and all(value and math.isfinite(value) for value in self.embedding)
+        )
+
+
+class VectorStorePointPayload(EmbeddedChunkMetadata):
+    chunk_id: str = pydantic.Field(min_length=1)
+    text: str = pydantic.Field(min_length=1)

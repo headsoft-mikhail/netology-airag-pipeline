@@ -3,6 +3,7 @@ import logging
 import math
 import typing
 
+import pydantic
 from qdrant_client import models as qdrant_models
 
 from rag import models
@@ -21,10 +22,10 @@ class VectorStoreValidationMetrics:
     missing_text_count: int
     missing_chunk_id_count: int
     missing_document_id_count: int
-    missing_metadata_count: int
+    invalid_metadata_count: int
 
     @property
-    def valid(self) -> bool:
+    def overall_validity(self) -> bool:
         return not any(
             (
                 self.invalid_dimensions_count,
@@ -33,13 +34,10 @@ class VectorStoreValidationMetrics:
                 self.missing_text_count,
                 self.missing_chunk_id_count,
                 self.missing_document_id_count,
-                self.missing_metadata_count,
+                self.invalid_metadata_count,
                 self.input_embeddings_count != self.stored_points_count,
             )
         )
-
-    def to_dict(self) -> dict[str, typing.Any]:
-        return dataclasses.asdict(self)
 
 
 @dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
@@ -56,23 +54,22 @@ class VectorStoreValidator:
         invalid_vectors_count = 0
         missing_text_count = 0
         missing_document_id_count = 0
-        missing_metadata_count = 0
-
-        for one_embedded_chunk in embedded_chunks:
-            if len(one_embedded_chunk.embedding) != self.config.vectors_dimensions:
-                invalid_dimensions_count += 1
-
-            if not one_embedded_chunk.embedding:
-                empty_vectors_count += 1
-
-            if not all(math.isfinite(value) for value in one_embedded_chunk.embedding):
-                invalid_vectors_count += 1
+        invalid_metadata_count = 0
 
         input_chunk_ids: typing.Final = {one_embedded_chunk.id for one_embedded_chunk in embedded_chunks}
-
         stored_chunk_ids: typing.Final[set[str]] = set()
 
         for one_point in stored_points:
+            one_vector = one_point.vector
+            if one_vector and isinstance(one_vector, list):
+                if len(one_vector) != self.config.vectors_dimensions:
+                    invalid_dimensions_count += 1
+
+                if not all(math.isfinite(one_value) for one_value in typing.cast("list[float]", one_vector)):
+                    invalid_vectors_count += 1
+            else:
+                empty_vectors_count += 1
+
             one_point_payload = one_point.payload or {}
 
             if chunk_id := one_point_payload.get("chunk_id"):
@@ -84,8 +81,10 @@ class VectorStoreValidator:
             if not one_point_payload.get("document_id"):
                 missing_document_id_count += 1
 
-            if not one_point_payload:
-                missing_metadata_count += 1
+            try:
+                models.VectorStorePointPayload.model_validate(one_point_payload)
+            except pydantic.ValidationError:
+                invalid_metadata_count += 1
 
         metrics: typing.Final = VectorStoreValidationMetrics(
             input_embeddings_count=len(embedded_chunks),
@@ -96,7 +95,7 @@ class VectorStoreValidator:
             missing_text_count=missing_text_count,
             missing_chunk_id_count=len(input_chunk_ids - stored_chunk_ids),
             missing_document_id_count=missing_document_id_count,
-            missing_metadata_count=missing_metadata_count,
+            invalid_metadata_count=invalid_metadata_count,
         )
         self._log_metrics(metrics)
         return metrics
@@ -113,7 +112,7 @@ class VectorStoreValidator:
                 "missing_text=%d, "
                 "missing_chunk_id=%d, "
                 "missing_document_id=%d, "
-                "missing_metadata=%d, "
+                "invalid_metadata=%d, "
                 "valid=%s"
             ),
             metrics.input_embeddings_count,
@@ -124,6 +123,6 @@ class VectorStoreValidator:
             metrics.missing_text_count,
             metrics.missing_chunk_id_count,
             metrics.missing_document_id_count,
-            metrics.missing_metadata_count,
-            metrics.valid,
+            metrics.invalid_metadata_count,
+            metrics.overall_validity,
         )
