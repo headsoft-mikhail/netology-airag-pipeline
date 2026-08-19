@@ -53,6 +53,11 @@ class PrepareManifest(ManifestCreatorProtocol):
             "run_id": str(uuid.uuid4()),
             "started_at": started_at,
             "created_at": dt.datetime.now(tz=dt.UTC).isoformat(),
+            "paths": {
+                "config": str(self.config.paths.config),
+                "input_dir": str(self.config.paths.input),
+                "prepared_path": str(self.config.paths.prepared_jsonl),
+            },
             "count": {
                 "input_documents": len(raw_documents),
                 "output_documents": len(deduplication_result.documents),
@@ -81,6 +86,11 @@ class ChunkingManifest(ManifestCreatorProtocol):
             "run_id": str(uuid.uuid4()),
             "started_at": started_at,
             "created_at": dt.datetime.now(tz=dt.UTC).isoformat(),
+            "paths": {
+                "config": str(self.config.paths.config),
+                "prepared_path": str(self.config.paths.prepared_jsonl),
+                "chunks_path": str(self.config.paths.chunks_jsonl),
+            },
             "count": {
                 "input_documents": len(prepared_documents),
                 "output_chunks": len(chunks),
@@ -107,6 +117,11 @@ class EmbeddingManifest(ManifestCreatorProtocol):
             "run_id": str(uuid.uuid4()),
             "started_at": started_at,
             "created_at": dt.datetime.now(tz=dt.UTC).isoformat(),
+            "paths": {
+                "config": str(self.config.paths.config),
+                "chunks_path": str(self.config.paths.chunks_jsonl),
+                "embeddings_path": str(self.config.paths.embeddings_jsonl),
+            },
             "count": {
                 "input_chunks": len(chunks),
                 "output_embeddings": len(embedded_chunks),
@@ -132,6 +147,11 @@ class VectorStoreManifest(ManifestCreatorProtocol):
             "run_id": str(uuid.uuid4()),
             "started_at": started_at,
             "created_at": dt.datetime.now(tz=dt.UTC).isoformat(),
+            "paths": {
+                "config": str(self.config.paths.config),
+                "embeddings_path": str(self.config.paths.embeddings_jsonl),
+                "search_results": str(self.config.paths.search_results_json),
+            },
             "count": {
                 "input_embeddings": len(embedded_chunks),
                 "stored_points": validation_metrics.stored_points_count,
@@ -142,7 +162,8 @@ class VectorStoreManifest(ManifestCreatorProtocol):
                 "vectors_dimensions": self.config.vector_store.vectors_dimensions,
                 "distance": self.config.vector_store.distance,
             },
-            "validation": dataclasses.asdict(validation_metrics),
+            "validation": dataclasses.asdict(validation_metrics)
+            | {"overall_validity": validation_metrics.overall_validity},
         }
 
         LOGGER_OBJ.info("Manifest prepared.")
@@ -175,6 +196,9 @@ class ManifestManager:
 
     def load(self, stage: StagesEnum) -> dict[str, typing.Any]:
         path: typing.Final = self._select_path(stage) / "manifest.json"
+        if not path.exists():
+            return {}
+
         with path.open("r", encoding="utf-8") as file:
             return typing.cast(
                 dict[str, typing.Any],

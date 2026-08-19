@@ -1,8 +1,13 @@
 {
   "prepare": {
-    "run_id": "3c2b4f61-6ec1-47aa-b7cb-463a03d8c3f5",
-    "started_at": "2026-08-16T10:32:21.802674+00:00",
-    "created_at": "2026-08-16T10:32:21.951678+00:00",
+    "run_id": "ff4b7d95-6b18-4acc-bcca-55e84f60d5cb",
+    "started_at": "2026-08-19T14:48:27.942507+00:00",
+    "created_at": "2026-08-19T14:48:28.087352+00:00",
+    "paths": {
+      "config": "config/pipeline.yaml",
+      "input_dir": "data/raw",
+      "prepared_path": "data/prepared/dataset.json"
+    },
     "count": {
       "input_documents": 15,
       "output_documents": 13
@@ -16,11 +21,16 @@
       "normalization_unicode_form": "NFC"
     }
   },
-  "run_id": "a618fb82-78fd-4233-a3ce-c41b3682e7e4",
+  "run_id": "bb49b1e9-2462-4e78-9228-45a32f619b24",
   "chunk": {
-    "run_id": "cba6d499-711f-404a-b9bf-6b3659f1d464",
-    "started_at": "2026-08-16T10:32:26.056057+00:00",
-    "created_at": "2026-08-16T10:32:26.149363+00:00",
+    "run_id": "24bac63c-09f7-48c1-b3a9-252935c7bbb9",
+    "started_at": "2026-08-19T14:48:32.386769+00:00",
+    "created_at": "2026-08-19T14:48:32.478840+00:00",
+    "paths": {
+      "config": "config/pipeline.yaml",
+      "prepared_path": "data/prepared/dataset.json",
+      "chunks_path": "data/chunks/chunks.jsonl"
+    },
     "count": {
       "input_documents": 13,
       "output_chunks": 70

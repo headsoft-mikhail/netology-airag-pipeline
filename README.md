@@ -330,7 +330,7 @@ Prepared documents
 ----
 ### Loading
 
-На этапе Loading pipeline загружает подготовленные документы из `data/prepared/documents.jsonl` и преобразует их во внутренние модели.
+На этапе Loading pipeline загружает подготовленные документы из `data/prepared/dataset.jsonl` и преобразует их во внутренние модели.
 
 ---
 

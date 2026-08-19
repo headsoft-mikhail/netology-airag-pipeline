@@ -1,28 +1,34 @@
+import dataclasses
 import json
+import logging
 import typing
-from dataclasses import dataclass
-from pathlib import Path
+
+from rag.config import PathsConfig
+
+LOGGER_OBJ: typing.Final = logging.getLogger(__name__)
 
 
-@dataclass(kw_only=True, slots=True, frozen=True)
+@dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
 class DatasetExporter:
-    output_dir: Path
+    config: PathsConfig
 
     def export(self, documents: list[dict]) -> None:
-        self.output_dir.mkdir(parents=True, exist_ok=True)
+        self.config.prepared.mkdir(parents=True, exist_ok=True)
 
         self._export_json(documents)
         self._export_jsonl(documents)
 
-    def _export_json(self, documents: list[dict]) -> None:
-        output_path: typing.Final = self.output_dir / "dataset.json"
+        LOGGER_OBJ.info(
+            "Exported %d documents to %s",
+            len(documents),
+            self.config.input,
+        )
 
-        with output_path.open("w", encoding="utf-8") as file:
+    def _export_json(self, documents: list[dict]) -> None:
+        with self.config.prepared_json.open("w", encoding="utf-8") as file:
             json.dump(documents, file, ensure_ascii=False, indent=2)
 
     def _export_jsonl(self, documents: list[dict]) -> None:
-        output_path: typing.Final = self.output_dir / "dataset.jsonl"
-
-        with output_path.open("w", encoding="utf-8") as file:
+        with self.config.prepared_jsonl.open("w", encoding="utf-8") as file:
             for document in documents:
                 file.write(json.dumps(document, ensure_ascii=False) + "\n")

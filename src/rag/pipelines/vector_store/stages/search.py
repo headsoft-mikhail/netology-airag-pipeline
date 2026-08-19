@@ -16,6 +16,17 @@ class VectorSearchResult:
     query_text: str
     results: list[dict[str, typing.Any]]
 
+    @property
+    def most_relevant_result(self) -> dict[str, typing.Any]:
+        return self.results[0]
+
+    @property
+    def is_relevant(self) -> bool:
+        most_relevant_result: typing.Final = self.most_relevant_result
+        return most_relevant_result.get("score", 0) >= 0.99 and self.query_chunk_id == most_relevant_result.get(
+            "metadata", {}
+        ).get("chunk_id", "")
+
 
 @dataclasses.dataclass(kw_only=True, slots=True, frozen=True)
 class VectorStoreSearcher:

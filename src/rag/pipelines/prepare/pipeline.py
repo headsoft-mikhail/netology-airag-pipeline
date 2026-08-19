@@ -22,7 +22,7 @@ class RAGPreparePipeline:
         self.normalizer = TextNormalizer(config=config.normalization)
         self.deduplicator = Deduplicator(config=self.config.deduplication)
         self.structurer = DocumentStructurer()
-        self.exporter = DatasetExporter(output_dir=config.paths.prepared)
+        self.exporter = DatasetExporter(config=config.paths)
         self.manifest_manager = ManifestManager(config=self.config)
 
     def run(self) -> None:
@@ -61,8 +61,8 @@ class RAGPreparePipeline:
         structured_documents: typing.Final = self.structurer.structure_many(deduplication_result.documents)
         LOGGER_OBJ.info("Structurizing - DONE!\n-------------")
 
-        LOGGER_OBJ.info("Exporting results...")
         self.exporter.export(structured_documents)
+        LOGGER_OBJ.info("Exporting - DONE!\n-------------")
 
         self.manifest_manager.create_stage_manifest(
             stage=StagesEnum.PREPARE,

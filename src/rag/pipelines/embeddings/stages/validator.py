@@ -23,7 +23,7 @@ class EmbeddingValidationMetrics:
     text_mismatch_count: int
 
     @property
-    def valid(self) -> bool:
+    def overall_validity(self) -> bool:
         return not any(
             (
                 self.empty_embeddings_count,
@@ -172,5 +172,5 @@ class EmbeddingValidator:
             metrics.duplicate_ids_count,
             metrics.lineage_errors_count,
             metrics.text_mismatch_count,
-            metrics.valid,
+            metrics.overall_validity,
         )

@@ -32,7 +32,9 @@ class ContextBuilder:
                     ]
                 )
             )
-            context_logging_message += f"\n{payload.get('chunk_id')}\tScore: {point.score:.3f}\tSource: {payload.get('source')}"
+            context_logging_message += (
+                f"\n{payload.get('chunk_id')}\tScore: {point.score:.3f}\tSource: {payload.get('source')}"
+            )
         LOGGER_OBJ.info(context_logging_message)
 
         return "\n\n".join(chunks)
