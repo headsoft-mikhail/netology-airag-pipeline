@@ -26,51 +26,36 @@ class Evaluator:
         retrieval_results: typing.Final = self.retrieval_client.top_k(query)
         LOGGER_OBJ.info("Retrieval - DONE!\n-------------")
         context: typing.Final = self.context_builder.build_context(retrieval_results)
-        answer: typing.Final = self.llm_client.request(query=query, context=context)
-        LOGGER_OBJ.info(f"LLM request - DONE! Answer:\n {answer}\n-------------")
-        return answer
+        return self._evaluate(query=query, context=context)
 
-    def test(self):
+    def test(self) -> None:
         LOGGER_OBJ.info("Run self-test")
         test_results: typing.Final = []
         for one_test_query in self.config.test.questions:
             retrieval_results = self.retrieval_client.top_k(one_test_query)
+            LOGGER_OBJ.info("Retrieval - DONE!\n-------------")
             time.sleep(1)
-            answer = self.evaluate(one_test_query)
+            context = self.context_builder.build_context(retrieval_results)
+            answer = self._evaluate(query=one_test_query, context=context)
             test_results.append(
                 {
                     "query": one_test_query,
-                    "answer": answer,
                     "top_k": [one_result.model_dump() for one_result in retrieval_results],
+                    "min_score": self.config.context.min_score,
+                    "context": context,
+                    "answer": answer,
                 }
             )
         self._export_evaluation_data(test_results)
 
-    def _export_evaluation_data(self, data):
+    def _evaluate(self, query: str, context: str) -> str:
+        answer: typing.Final = self.llm_client.request(query=query, context=context)
+        LOGGER_OBJ.info(f"LLM request - DONE! Answer:\n {answer}\n-------------")
+        return answer
+
+    def _export_evaluation_data(self, data: list[dict[str, typing.Any]]) -> None:
         self.config.test.report_path.mkdir(parents=True, exist_ok=True)
         output_path: typing.Final = self.config.test.report_path / "evaluation_test.json"
 
         with output_path.open("w", encoding="utf-8") as file:
             json.dump(data, file, ensure_ascii=False, indent=2)
-
-    @staticmethod
-    def _build_context(retrieval_results: list[typing.Any]) -> str:
-        chunks: typing.Final[list[str]] = []
-        context_logging_message = "Chunks used for context:"
-
-        for index, point in enumerate(retrieval_results, start=1):
-            payload = point.payload if hasattr(point, "payload") and point.payload else {}
-
-            chunks.append(
-                "\n".join(
-                    [
-                        f"[Фрагмент {index}]",
-                        f"Источник: {payload.get('source')}",
-                        f"Текст: {payload.get('text')}",
-                    ]
-                )
-            )
-            context_logging_message += f"\n{payload.get('chunk_id')}\tSource: {payload.get('source')}"
-        LOGGER_OBJ.info(context_logging_message)
-
-        return "\n\n".join(chunks)
