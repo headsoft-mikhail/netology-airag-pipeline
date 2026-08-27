@@ -22,18 +22,19 @@ class ContextBuilder:
                 continue
 
             payload: dict[str, typing.Any] = point.payload or {}
+            source: typing.Final = payload.get("source")
 
             chunks.append(
                 "\n".join(
                     [
                         f"[Фрагмент {index}]",
-                        f"Источник: {payload.get('source')}",
+                        f"Источник: {source}",
                         f"Текст: {payload.get('text')}",
                     ]
                 )
             )
             context_logging_message += (
-                f"\n{payload.get('chunk_id')}\tScore: {point.score:.3f}\tSource: {payload.get('source')}"
+                f"\n{payload.get('chunk_id')}\tScore: {point.score:.3f}\tSource: {source}"
             )
         LOGGER_OBJ.info(context_logging_message)
 
