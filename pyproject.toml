@@ -13,6 +13,7 @@ dependencies = [
     "tiktoken",
     "sentence_transformers",
     "qdrant-client",
+    "requests",
 ]
 
 [dependency-groups]
