@@ -37,7 +37,7 @@ class EmbeddingExporter:
             )
 
     def _export_jsonl(self, embeddings: list[models.EmbeddedChunk]) -> None:
-        with self.config.embeddings_json.open("w", encoding="utf-8") as file:
+        with self.config.embeddings_jsonl.open("w", encoding="utf-8") as file:
             for one_embedding in embeddings:
                 json.dump(
                     one_embedding.model_dump(mode="json"),

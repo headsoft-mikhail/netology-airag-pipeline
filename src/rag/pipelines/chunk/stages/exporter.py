@@ -37,7 +37,7 @@ class ChunkExporter:
             )
 
     def _export_jsonl(self, chunks: list[models.Chunk]) -> None:
-        with self.config.chunks_json.open("w", encoding="utf-8") as file:
+        with self.config.chunks_jsonl.open("w", encoding="utf-8") as file:
             for chunk in chunks:
                 json.dump(
                     chunk.model_dump(mode="json"),

@@ -16,11 +16,11 @@ class PathsConfig(pydantic.BaseModel):
 
     @property
     def prepared_jsonl(self) -> Path:
-        return Path(self.prepared, "dataset.json")
+        return Path(self.prepared, "dataset.jsonl")
 
     @property
     def prepared_json(self) -> Path:
-        return Path(self.prepared, "dataset.jsonl")
+        return Path(self.prepared, "dataset.json")
 
     @property
     def chunks_json(self) -> Path:
